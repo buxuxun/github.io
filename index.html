@@ -3,107 +3,237 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Website</title>
+    <title>ミックス依頼募集 - MixMaster Studio</title>
+    <!-- Google Fontsのインポート -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
     <style>
-        /* 落ち着いた色調のCSS */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4; /* 薄いグレー */
-            color: #333; /* ダークグレー */
+            background-color: #1a1a1a; /* ダークグレー */
+            color: #e0e0e0; /* 明るいグレー */
+            line-height: 1.6;
         }
         header {
-            background-color: #2c3e50; /* 落ち着いたネイビー */
+            background: linear-gradient(135deg, #2c2c2c, #1a1a1a); /* グラデーション背景 */
             padding: 20px;
             text-align: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* ヘッダーに影 */
+        }
+        header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            color: #d4af37; /* ゴールド */
+            margin: 0;
+            font-size: 28px;
         }
         nav {
-            margin: 10px 0;
+            margin: 15px 0;
         }
         nav a {
-            color: #ecf0f1; /* 薄いホワイト */
+            color: #e0e0e0;
             text-decoration: none;
-            margin: 0 15px;
-            font-size: 18px;
+            margin: 0 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            position: relative;
+            transition: color 0.3s ease;
+            cursor: pointer;
         }
         nav a:hover {
-            color: #bdc3c7; /* ホバー時に少し明るく */
+            color: #d4af37; /* ゴールドに変化 */
+        }
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #d4af37;
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        nav a:hover::after {
+            width: 100%; /* ホバー時に下線が伸びるアニメーション */
+        }
+        nav a.active {
+            color: #d4af37;
+            font-weight: 600;
+        }
+        nav a.active::after {
+            width: 100%; /* アクティブなタブに下線 */
         }
         section {
-            padding: 40px;
+            padding: 60px 20px;
             text-align: center;
+            margin-top: 120px; /* ヘッダーの高さ分余白 */
+            display: none;
+            background: #252525; /* セクション背景 */
+            border-radius: 15px;
+            margin: 120px auto 60px;
+            max-width: 900px; /* コンテンツ幅を制限 */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* 立体感 */
+        }
+        section.active {
+            display: block;
+        }
+        section h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: #d4af37;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        .hero-image {
+            width: 100%;
+            max-width: 700px;
+            height: auto;
+            margin: 20px auto;
+            display: block;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+        form input, form textarea {
+            width: 100%;
+            max-width: 500px;
+            padding: 10px;
+            margin: 10px auto;
+            border: none;
+            border-radius: 5px;
+            background: #333;
+            color: #e0e0e0;
+            font-family: 'Roboto', sans-serif;
+        }
+        form textarea {
+            height: 150px;
+            resize: none;
+        }
+        form button {
+            padding: 10px 30px;
+            border: none;
+            border-radius: 5px;
+            background: linear-gradient(135deg, #d4af37, #b8972f);
+            color: #1a1a1a;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.1s ease, background 0.3s ease;
+        }
+        form button:hover {
+            transform: scale(1.05); /* ホバー時に少し大きく */
+            background: linear-gradient(135deg, #b8972f, #d4af37);
         }
         footer {
-            background-color: #2c3e50;
-            color: #ecf0f1;
+            background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
+            color: #e0e0e0;
             text-align: center;
-            padding: 10px;
+            padding: 15px;
             position: fixed;
             bottom: 0;
             width: 100%;
+            font-size: 14px;
+        }
+        /* レスポンシブ対応 */
+        @media (max-width: 768px) {
+            nav a {
+                margin: 0 10px;
+                font-size: 14px;
+            }
+            section {
+                padding: 40px 15px;
+                margin: 100px auto 40px;
+            }
+            header h1 {
+                font-size: 24px;
+            }
         }
     </style>
 </head>
 <body>
     <!-- ヘッダーとナビゲーション -->
     <header>
-        <h1>My Website</h1>
+        <h1>MixMaster Studio</h1>
         <nav>
-            <a href="#home">HOME</a>
-            <a href="#profile">Profile</a>
-            <a href="#works">Works</a>
-            <a href="#price">Price</a>
-            <a href="#form">Form</a>
-            <a href="#contact">Contact</a>
+            <a onclick="showSection('home')" class="active">HOME</a>
+            <a onclick="showSection('profile')">Profile</a>
+            <a onclick="showSection('works')">Works</a>
+            <a onclick="showSection('price')">Price</a>
+            <a onclick="showSection('form')">Form</a>
+            <a onclick="showSection('contact')">Contact</a>
         </nav>
     </header>
 
     <!-- 各セクション -->
-    <section id="home">
+    <section id="home" class="active">
         <h2>HOME</h2>
-        <p>ようこそ、私のウェブサイトへ。ここでは私の活動やサービスをご覧いただけます。</p>
+        <p>プロフェッショナルなミックス依頼を承ります。あなたの音楽を最高のクオリティに仕上げます！</p>
+        <!-- 画像をここに埋め込み -->
+        <img src="mixing-console.jpg" alt="ミキシングコンソール" class="hero-image">
     </section>
 
     <section id="profile">
         <h2>Profile</h2>
-        <p>私は〇〇です。〇〇の経験があり、〇〇を得意としています。</p>
+        <p>私は10年以上の経験を持つミックスエンジニアです。ジャンルを問わず、最高のサウンドを提供します。</p>
     </section>
 
     <section id="works">
         <h2>Works</h2>
-        <p>これまでに手掛けた作品の一部をご紹介します。</p>
-        <!-- ここに画像やリストを追加可能 -->
+        <p>これまでに手掛けたミックス作品の一部をご紹介します。ポップ、ロック、EDMなど幅広いジャンルに対応可能です。</p>
+        <!-- ここにサンプル音源やリンクを追加可能 -->
     </section>
 
     <section id="price">
         <h2>Price</h2>
-        <p>サービスの料金表です。お気軽にお問い合わせください。</p>
-        <ul style="list-style: none;">
-            <li>サービスA: ¥10,000</li>
-            <li>サービスB: ¥20,000</li>
+        <p>ミックス依頼の料金表です。詳細はお気軽にお問い合わせください。</p>
+        <ul style="list-style: none; padding: 0;">
+            <li>1曲ミックス: ¥15,000</li>
+            <li>アルバム（10曲）: ¥120,000</li>
+            <li>マスタリング追加: ¥5,000/曲</li>
         </ul>
     </section>
 
     <section id="form">
         <h2>Form</h2>
-        <p>お問い合わせは以下のフォームからどうぞ。</p>
+        <p>ミックス依頼は以下のフォームからどうぞ。詳細をお聞かせください。</p>
         <form>
-            <input type="text" placeholder="お名前" style="display: block; margin: 10px auto;"><br>
-            <input type="email" placeholder="メールアドレス" style="display: block; margin: 10px auto;"><br>
-            <textarea placeholder="メッセージ" style="display: block; margin: 10px auto;"></textarea><br>
+            <input type="text" placeholder="お名前" required><br>
+            <input type="email" placeholder="メールアドレス" required><br>
+            <textarea placeholder="依頼内容（ジャンル、曲数、納期など）" required></textarea><br>
             <button type="submit">送信</button>
         </form>
     </section>
 
     <section id="contact">
         <h2>Contact</h2>
-        <p>メール: example@email.com | 電話: 123-456-7890</p>
+        <p>メール: mixmaster@studio.com | 電話: 123-456-7890</p>
     </section>
 
     <!-- フッター -->
     <footer>
-        <p>&copy; 2025 My Website. All rights reserved.</p>
+        <p>© 2025 MixMaster Studio. All rights reserved.</p>
     </footer>
+
+    <!-- JavaScriptでタブ切り替え -->
+    <script>
+        function showSection(sectionId) {
+            // すべてのセクションとタブを非アクティブに
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.querySelectorAll('nav a').forEach(link => {
+                link.classList.remove('active');
+            });
+            // 選択したセクションとタブをアクティブに
+            document.getElementById(sectionId).classList.add('active');
+            document.querySelector(`nav a[onclick="showSection('${sectionId}')"]`).classList.add('active');
+        }
+
+        // 初期表示でHOMEを表示
+        showSection('home');
+    </script>
 </body>
 </html>
