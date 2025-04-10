@@ -67,11 +67,11 @@
             display: none;
             position: fixed;
             top: 20px;
-            left: 20px;
+            right: 20px;
             width: 30px;
             height: 25px;
             cursor: pointer;
-            z-index: 1001;
+            z-index: 1002;
         }
         .hamburger span {
             position: absolute;
@@ -86,14 +86,14 @@
         #sidebar {
             position: fixed;
             top: 0;
-            left: -250px;
+            left: -260px;
             width: 250px;
             height: 100%;
             background: rgba(0, 0, 0, 0.9);
             padding: 60px 20px 20px;
             box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
             transition: left 0.3s ease;
-            z-index: 1000;
+            z-index: 1001;
             display: flex;
             flex-direction: column;
         }
@@ -119,6 +119,19 @@
         }
         #sidebar.open {
             left: 0;
+        }
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: none;
+        }
+        #overlay.active {
+            display: block;
         }
         section {
             padding: 80px 20px 120px;
@@ -326,7 +339,7 @@
                 display: block;
             }
             #sidebar {
-                left: -250px;
+                left: -260px;
             }
             #sidebar.open {
                 left: 0;
@@ -338,7 +351,7 @@
             }
             header h1 {
                 font-size: 28px;
-                margin-left: 50px;
+                margin-right: 50px;
             }
             .youtube-videos {
                 grid-template-columns: 1fr;
@@ -375,6 +388,7 @@
             <a onclick="showSection('form')">form</a>
             <a onclick="showSection('contact')">contact</a>
         </nav>
+        <div id="overlay" onclick="toggleSidebar()"></div>
     </header>
 
     <section id="home" class="active">
@@ -538,8 +552,9 @@
     <section id="contact">
         <div class="content-wrapper">
             <h2>Contact</h2>
-            <p>メールアドレス: <a href="mailto:buxuxuq@gmail.com">buxuxuq@gmail.com</a></p>
+            <p>何かご不明な点ございましたら、直接XのDMからご連絡していただけたらと思います。</p>
             <p>X: <a href="https://twitter.com/buxun" target="_blank">@buxun</a></p>
+            <p>メールアドレス: <a href="mailto:buxuxuq@gmail.com">buxuxuq@gmail.com</a></p>
             <p>企業様は、直接メールにてご連絡ください。</p>
         </div>
     </section>
@@ -586,7 +601,9 @@
 
         function toggleSidebar() {
             const sidebar = document.getElementById("sidebar");
+            const overlay = document.getElementById("overlay");
             sidebar.classList.toggle("open");
+            overlay.classList.toggle("active");
         }
 
         function showSection(sectionId) {
@@ -621,6 +638,7 @@
 
                 document.querySelector(`#sidebar a[onclick="showSection('${sectionId}')"]`).classList.add('active');
                 document.getElementById("sidebar").classList.remove("open");
+                document.getElementById("overlay").classList.remove("active");
             }, 500);
         }
 
@@ -679,7 +697,7 @@
             document.getElementById("delivery").addEventListener("change", calculateEstimate);
             document.getElementById("collab").addEventListener("change", calculateEstimate);
             document.getElementById("collab_members").addEventListener("change", calculateEstimate);
-            document.getElementById("main_track").addEventListener("change", calculateEstimate);
+            document.getElementById("main_track omin_track").addEventListener("change", calculateEstimate);
             document.getElementById("harmony_track").addEventListener("change", calculateEstimate);
             document.getElementById("harmony_creation").addEventListener("change", calculateEstimate);
             document.getElementById("other_track").addEventListener("change", calculateEstimate);
