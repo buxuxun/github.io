@@ -48,7 +48,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.8);
             z-index: 0;
         }
         header h1 {
@@ -312,7 +312,7 @@
         #estimate {
             position: fixed;
             bottom: 40px;
-            right: 35%;
+            right: 30%; /* 35% → 30% に変更 */
             background: rgba(0, 0, 0, 0.8);
             color: #e0e0e0;
             padding: 10px 20px;
@@ -344,7 +344,7 @@
             background: rgba(0, 0, 0, 0.3);
             color: #b0b0b0;
             text-align: center;
-            padding: 15px;
+            padding: 7.5px; /* 15px → 7.5px に変更 */
             position: fixed;
             bottom: 0;
             width: 100%;
@@ -401,6 +401,9 @@
             }
             form {
                 margin-right: 0;
+            }
+            #estimate {
+                right: 10%; /* モバイルでは右端に近づける */
             }
         }
     </style>
@@ -467,7 +470,7 @@
             <h2>Price</h2>
             <p>基本料金：フルコーラス￥7,000 / ワンコーラス￥5,000</p>
             <p>納期オプション：3日（+￥3,000） / 1週間（+￥2,000） / 2週間（+￥0）</p>
-            <p>コラボ：2人から選択可能、1人増えるごとに+￥3,000（例：コラボ2人の場合、基本料金+￥3,000、3人の場合+￥6,000）</p>
+            <p>コラボ：1人増えるごとに+￥3,000（例：コラボ2人の場合、基本料金+￥3,000、3人の場合+￥6,000）</p>
             <p>追加料金：</p>
             <ul>
                 <li>メイントラック：1本目無料、2本目以降1本につき+￥1,000（コラボありの場合はコラボ人数分まで無料、例：コラボ2人なら2本まで無料）</li>
@@ -486,9 +489,9 @@
             <form id="mixForm" action="https://formsubmit.co/buxuxuq@gmail.com" method="POST">
                 <h2>Form</h2>
                 <label>お名前（HN可）</label>
-                <input type="text" name="name" required>
-                <label>ご連絡先（メールアドレスやSNSのID）</label>
-                <input type="text" name="contact" required>
+                <input type="text" name="name" placeholder="ぶん" required>
+                <label>ご連絡先（XのIDもしくはメールアドレス）</label>
+                <input type="text" name="contact" placeholder="buxun" required>
                 <label>基本料金</label>
                 <select name="base_price" id="base_price" required>
                     <option value="フルコーラス">フルコーラス（￥7,000）</option>
@@ -520,9 +523,9 @@
                     </select>
                 </div>
                 <label>曲名（原曲URL）</label>
-                <input type="text" name="title_url" required>
+                <input type="text" name="title_url" placeholder="GLIDE（https://www.youtube.com/watch?v=JhYUena5eTs&ab）" required>
                 <label>音源URL（ギガファイル便など）</label>
-                <input type="url" name="audio_url" required>
+                <input type="url" name="audio_url" placeholder="https://gigafile.nu/" required>
                 <label>参考曲URL（任意）</label>
                 <input type="url" name="ref_url">
                 <label>トラック数</label>
