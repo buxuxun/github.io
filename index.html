@@ -99,8 +99,6 @@
             position: relative;
             background: url('images/mixing-console.jpg') no-repeat center center;
             background-size: cover;
-            opacity: 0; /* 初期状態で非表示（アニメーション用） */
-            transition: opacity 1s ease; /* トランジション時間を1秒に */
         }
         section::before {
             content: '';
@@ -114,7 +112,6 @@
         }
         section.active {
             display: block;
-            opacity: 1; /* アクティブ時に表示（フェードイン） */
         }
         section h2 {
             font-family: 'Orbitron', sans-serif;
@@ -137,6 +134,11 @@
         .content-wrapper {
             position: relative;
             z-index: 1;
+            opacity: 0; /* 初期状態で非表示 */
+            transition: opacity 0.5s ease; /* 0.5秒のフェードイン/フェードアウト */
+        }
+        .content-wrapper.active {
+            opacity: 1; /* アクティブ時に表示 */
         }
         /* プロフィール画像のスタイル */
         .profile-image {
@@ -195,8 +197,8 @@
             margin-top: 0.5rem;
             border: 1px solid #444;
             border-radius: 5px;
-            background: rgba(255, 255, 255, 0.1);
-            color: #333333; /* 文字色をダークグレーに変更 */
+            background: #ffffff; /* 背景を白に変更 */
+            color: #333333; /* 文字色はダークグレーのまま */
             font-family: 'Roboto', sans-serif;
             font-size: 1rem;
             box-sizing: border-box;
@@ -312,7 +314,7 @@
 
     <!-- 各セクション -->
     <section id="home" class="active">
-        <div class="content-wrapper">
+        <div class="content-wrapper active">
             <h2>HOME</h2>
             <p>あなたの音楽を次のレベルへ。プロフェッショナルなミックスで最高のサウンドを。</p>
         </div>
@@ -353,8 +355,14 @@
             <h2>Price</h2>
             <p>基本料金：フルコーラス￥7,000 / ワンコーラス￥5,000</p>
             <p>納期オプション：3日（+￥3,000） / 1週間（+￥2,000） / 2週間（+￥0）</p>
-            <p>コラボ：1人増えるごとに+￥3,000</p>
-            <p>追加料金：トラック数やハモリ作成に応じて加算</p>
+            <p>コラボ：1人増えるごとに+￥3,000（例：コラボ2人の場合、基本料金+￥3,000）</p>
+            <p>追加料金：</p>
+            <ul>
+                <li>メイントラック：1本目無料、2本目以降1本につき+￥1,000（コラボ2人の場合は2本まで無料）</li>
+                <li>ハモリトラック：1本目無料、2本目以降1本につき+￥1,000（コラボ2人の場合は2本まで無料）</li>
+                <li>ハモリ作成：1本目から1本につき+￥1,000</li>
+                <li>その他（コーラス、合いの手など）：1本目から1本につき+￥1,000</li>
+            </ul>
             <p>詳細なお見積りはフォームにてご確認ください。</p>
         </div>
     </section>
@@ -415,7 +423,7 @@
                 <input type="url" name="ref_url">
 
                 <label>トラック数</label>
-                <label>メイントラック（2本目以降1本につき+￥1,000）</label>
+                <label>メイントラック（2本目以降1本につき+￥1,000、コラボ人数+1本まで無料）</label>
                 <select name="main_track" id="main_track">
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -429,7 +437,7 @@
                     <option value="10">10</option>
                 </select>
 
-                <label>ハモリトラック（2本目以降1本につき+￥1,000）</label>
+                <label>ハモリトラック（2本目以降1本につき+￥1,000、コラボ人数+1本まで無料）</label>
                 <select name="harmony_track" id="harmony_track">
                     <option value="0">0</option>
                     <option value="1">1</option>
@@ -508,10 +516,12 @@
     <!-- JavaScriptでタブ切り替え -->
     <script>
         function showSection(sectionId) {
-            // 現在アクティブなセクションをフェードアウト
+            // 現在アクティブなセクションのコンテンツをフェードアウト
             const currentSection = document.querySelector('section.active');
-            if (currentSection) {
-                currentSection.style.opacity = '0';
+            const currentContent = currentSection ? currentSection.querySelector('.content-wrapper') : null;
+            if (currentContent) {
+                currentContent.style.opacity = '0';
+                currentContent.classList.remove('active');
             }
 
             // すべてのセクションを非表示にし、すべてのナビリンクのactiveクラスを削除
@@ -526,15 +536,17 @@
 
                 // 新しいセクションを表示してフェードイン
                 const newSection = document.getElementById(sectionId);
+                const newContent = newSection.querySelector('.content-wrapper');
                 newSection.style.display = 'block';
                 setTimeout(() => {
                     newSection.classList.add('active');
-                    newSection.style.opacity = '1';
+                    newContent.classList.add('active');
+                    newContent.style.opacity = '1';
                 }, 50); // わずかな遅延でスムーズに
 
                 // 対応するナビリンクにactiveクラスを追加
                 document.querySelector(`nav a[onclick="showSection('${sectionId}')"]`).classList.add('active');
-            }, 1000); // フェードアウトの時間（1秒）に合わせる
+            }, 500); // フェードアウトの時間（0.5秒）に合わせる
         }
 
         // 初期表示でHOMEを表示
@@ -565,13 +577,26 @@
 
             let total = basePrices[basePrice];
             total += deliveryFees[delivery];
+
+            // コラボ料金
             if (collab === "あり") {
                 total += collabMembers * 3000; // コラボ人数×￥3,000
             }
-            total += (mainTrack > 1) ? (mainTrack - 1) * 1000 : 0; // メイントラック
-            total += (harmonyTrack > 1) ? (harmonyTrack - 1) * 1000 : 0; // ハモリトラック
-            total += (harmonyCreation > 0) ? (harmonyCreation) * 1000 : 0; // ハモリ作成
-            total += (otherTrack > 0) ? (otherTrack) * 1000 : 0; // その他トラック
+
+            // コラボ人数に応じた無料トラック数の計算
+            const freeTracks = (collab === "あり" && collabMembers > 0) ? (collabMembers + 1) : 1; // コラボ人数+1が無料枠（ソロなら1本無料）
+
+            // メイントラック：無料枠を超える分は1本につき+￥1,000
+            total += (mainTrack > freeTracks) ? (mainTrack - freeTracks) * 1000 : 0;
+
+            // ハモリトラック：無料枠を超える分は1本につき+￥1,000
+            total += (harmonyTrack > freeTracks) ? (harmonyTrack - freeTracks) * 1000 : 0;
+
+            // ハモリ作成：1本目から1本につき+￥1,000
+            total += (harmonyCreation > 0) ? (harmonyCreation) * 1000 : 0;
+
+            // その他トラック：1本目から1本につき+￥1,000
+            total += (otherTrack > 0) ? (otherTrack) * 1000 : 0;
 
             document.getElementById("estimate").textContent = `お見積り金額: ${total.toLocaleString()}円`;
         }
