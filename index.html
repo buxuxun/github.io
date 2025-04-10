@@ -338,52 +338,18 @@
     <section id="price">
         <div class="content-wrapper">
             <h2>Price</h2>
-            <p>
-                どなたからの依頼も承りますが、基本的に有償とさせていただきます。<br>
-                ※下記プランは個人様向けのプランです。<br>
-                企業様は希望納期と金額を、企業様のほうからご提示ください。<br><br>
-                <strong>料金プランについて</strong><br><br>
-                <strong>プラン1</strong><br>
-                通常の歌ってみたMIX（ピッチ補正、タイミング補正、マスタリング等含む）<br>
-                ▶️￥7000<br><br>
-                <strong>プラン2</strong><br>
-                早納歌ってみたMIX（上記作業を3日以内で行い、音源をお送りいたします）<br>
-                ▶️￥10000<br><br>
-                <strong>プラン3</strong><br>
-                ピッチ補正&タイミング補正&ハモ作成（MIX作業は行いません）<br>
-                ▶️￥4000<br><br>
-                <strong>プラン4</strong><br>
-                マスタリングのみ<br>
-                ▶️￥3000<br><br>
-                <strong>プラン5</strong><br>
-                ワンコーラス歌ってみたMIX（ピッチ補正、タイミング補正、マスタリング等含む）<br>
-                ▶️￥5000<br><br>
-                <strong>プラン6</strong><br>
-                ワンコーラス早納歌ってみたMIX（上記作業を3日以内で行い、音源をお送りいたします）<br>
-                ▶️￥8000<br><br>
-                ※通常プランの場合、納期は2週間とさせていただきます。<br>
-                ※メイントラックは1本目無料、2本目以降1本につき+1000円、ハモリトラックは1本目まで無料、2本目以降1本につき+1000円、コーラスや台詞などのトラックがある場合は1トラックごとに+1000円頂きます。<br>
-                ※ハモ作成をする場合1本につき+1000円頂きます。<br>
-                ※コラボの場合は基本的に1人増えるごとに+3000円とさせていただきます。<br><br>
-                <strong>例）</strong><br><br>
-                プラン1（メイン3本、ハモリ2本、台詞1本、ハモリ作成2本）の場合<br><br>
-                プラン1（7000円）<br>
-                メイン3本（2000円）<br>
-                ハモリ2本（1000円）<br>
-                台詞1本（1000円）<br>
-                ハモリ作成2本（2000円）<br><br>
-                計13000円となります。<br><br>
-                <strong>お支払いについて</strong><br><br>
-                お支払いを確認させていただいてから、作業開始とさせていただいております。<br>
-                ※お支払い方法は基本的に現金振込とさせていただきます。
-            </p>
+            <p>基本料金：フルコーラス￥7,000 / ワンコーラス￥5,000</p>
+            <p>納期オプション：3日（+￥3,000） / 1週間（+￥2,000） / 2週間（+￥0）</p>
+            <p>コラボ：1人増えるごとに+￥3,000</p>
+            <p>追加料金：トラック数やハモリ作成に応じて加算</p>
+            <p>詳細なお見積りはフォームにてご確認ください。</p>
         </div>
     </section>
 
     <section id="form">
         <div class="content-wrapper">
             <form action="https://formsubmit.co/buxuxuq@gmail.com" method="POST">
-                <h2>Form</h2> <!-- タイトルを変更 -->
+                <h2>Form</h2>
 
                 <label>お名前（HN可）</label>
                 <input type="text" name="name" required>
@@ -391,15 +357,40 @@
                 <label>ご連絡先（メールアドレスやSNSのID）</label>
                 <input type="text" name="contact" required>
 
-                <label>ご希望プラン</label>
-                <select name="plan" id="plan" required>
-                    <option value="プラン1">プラン1（7,000円）</option>
-                    <option value="プラン2">プラン2（10,000円）</option>
-                    <option value="プラン3">プラン3（4,000円）</option>
-                    <option value="プラン4">プラン4（3,000円）</option>
-                    <option value="プラン5">プラン5（5,000円）</option>
-                    <option value="プラン6">プラン6（8,000円）</option>
+                <label>基本料金</label>
+                <select name="base_price" id="base_price" required>
+                    <option value="フルコーラス">フルコーラス（￥7,000）</option>
+                    <option value="ワンコーラス">ワンコーラス（￥5,000）</option>
                 </select>
+
+                <label>納期</label>
+                <select name="delivery" id="delivery" required>
+                    <option value="3日">3日（+￥3,000）</option>
+                    <option value="1週間">1週間（+￥2,000）</option>
+                    <option value="2週間">2週間（+￥0）</option>
+                </select>
+
+                <label>コラボの有無</label>
+                <select name="collab" id="collab" required>
+                    <option value="なし">コラボなし</option>
+                    <option value="あり">コラボあり</option>
+                </select>
+
+                <div id="collab-members" style="display: none;">
+                    <label>コラボ人数（1人増えるごとに+￥3,000）</label>
+                    <select name="collab_members" id="collab_members">
+                        <option value="1">1人</option>
+                        <option value="2">2人</option>
+                        <option value="3">3人</option>
+                        <option value="4">4人</option>
+                        <option value="5">5人</option>
+                        <option value="6">6人</option>
+                        <option value="7">7人</option>
+                        <option value="8">8人</option>
+                        <option value="9">9人</option>
+                        <option value="10">10人</option>
+                    </select>
+                </div>
 
                 <label>曲名（原曲URL）</label>
                 <input type="text" name="title_url" required>
@@ -411,7 +402,7 @@
                 <input type="url" name="ref_url">
 
                 <label>トラック数</label>
-                <label>メイントラック（2本目以降1本につき+1,000円）</label>
+                <label>メイントラック（2本目以降1本につき+￥1,000）</label>
                 <select name="main_track" id="main_track">
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -425,7 +416,7 @@
                     <option value="10">10</option>
                 </select>
 
-                <label>ハモリトラック（1本目まで無料、2本目以降1本につき+1,000円）</label>
+                <label>ハモリトラック（1本目まで無料、2本目以降1本につき+￥1,000）</label>
                 <select name="harmony_track" id="harmony_track">
                     <option value="0">0</option>
                     <option value="1">1</option>
@@ -440,7 +431,7 @@
                     <option value="10">10</option>
                 </select>
 
-                <label>ハモリトラック作成（1本につき+1,000円）</label>
+                <label>ハモリトラック作成（1本につき+￥1,000）</label>
                 <select name="harmony_creation" id="harmony_creation">
                     <option value="0">0</option>
                     <option value="1">1</option>
@@ -455,7 +446,7 @@
                     <option value="10">10</option>
                 </select>
 
-                <label>その他(コーラスや合いの手など)（1本につき+1,000円）</label>
+                <label>その他(コーラスや合いの手など)（1本につき+￥1,000）</label>
                 <select name="other_track" id="other_track">
                     <option value="0">0</option>
                     <option value="1">1</option>
@@ -525,37 +516,55 @@
     <!-- フォームのお見積り計算スクリプト -->
     <script>
         function calculateEstimate() {
-            const planPrices = {
-                "プラン1": 7000,
-                "プラン2": 10000,
-                "プラン3": 4000,
-                "プラン4": 3000,
-                "プラン5": 5000,
-                "プラン6": 8000
+            const basePrices = {
+                "フルコーラス": 7000,
+                "ワンコーラス": 5000
+            };
+            const deliveryFees = {
+                "3日": 3000,
+                "1週間": 2000,
+                "2週間": 0
             };
 
-            const plan = document.getElementById("plan").value;
+            const basePrice = document.getElementById("base_price").value;
+            const delivery = document.getElementById("delivery").value;
+            const collab = document.getElementById("collab").value;
+            const collabMembers = parseInt(document.getElementById("collab_members").value) || 0;
             const mainTrack = parseInt(document.getElementById("main_track").value);
             const harmonyTrack = parseInt(document.getElementById("harmony_track").value);
             const harmonyCreation = parseInt(document.getElementById("harmony_creation").value);
             const otherTrack = parseInt(document.getElementById("other_track").value);
 
-            let total = planPrices[plan];
-            // メイントラック：1本目は無料、2本目以降1本につき+1000円
-            total += (mainTrack > 1) ? (mainTrack - 1) * 1000 : 0;
-            // ハモリトラック：1本目まで無料、2本目以降1本につき+1000円
-            total += (harmonyTrack > 1) ? (harmonyTrack - 1) * 1000 : 0;
-            // ハモリトラック作成：1本目から1本につき+1000円
-            total += (harmonyCreation > 0) ? (harmonyCreation) * 1000 : 0;
-            // その他のトラック：1本目から1本につき+1000円
-            total += (otherTrack > 0) ? (otherTrack) * 1000 : 0;
+            let total = basePrices[basePrice];
+            total += deliveryFees[delivery];
+            if (collab === "あり") {
+                total += collabMembers * 3000; // コラボ人数×￥3,000
+            }
+            total += (mainTrack > 1) ? (mainTrack - 1) * 1000 : 0; // メイントラック
+            total += (harmonyTrack > 1) ? (harmonyTrack - 1) * 1000 : 0; // ハモリトラック
+            total += (harmonyCreation > 0) ? (harmonyCreation) * 1000 : 0; // ハモリ作成
+            total += (otherTrack > 0) ? (otherTrack) * 1000 : 0; // その他トラック
 
             document.getElementById("estimate").textContent = `お見積り金額: ${total.toLocaleString()}円`;
         }
 
+        // コラボの有無に応じてコラボ人数の選択を表示/非表示
+        document.getElementById("collab").addEventListener("change", function() {
+            const collabMembersDiv = document.getElementById("collab-members");
+            if (this.value === "あり") {
+                collabMembersDiv.style.display = "block";
+            } else {
+                collabMembersDiv.style.display = "none";
+            }
+            calculateEstimate();
+        });
+
         // フォームが表示されたとき（formタブがアクティブなとき）にイベントリスナーを設定
         document.getElementById("form").addEventListener("click", function() {
-            document.getElementById("plan").addEventListener("change", calculateEstimate);
+            document.getElementById("base_price").addEventListener("change", calculateEstimate);
+            document.getElementById("delivery").addEventListener("change", calculateEstimate);
+            document.getElementById("collab").addEventListener("change", calculateEstimate);
+            document.getElementById("collab_members").addEventListener("change", calculateEstimate);
             document.getElementById("main_track").addEventListener("change", calculateEstimate);
             document.getElementById("harmony_track").addEventListener("change", calculateEstimate);
             document.getElementById("harmony_creation").addEventListener("change", calculateEstimate);
