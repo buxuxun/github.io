@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STUDIO BUN</title>
+    <title>STUDIO BUN - Home</title>
     <!-- Google Fontsのインポート（OrbitronとRalewayを追加） -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Raleway:wght@300;400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
     <!-- Font Awesome for social icons -->
@@ -34,10 +34,10 @@
             padding: 20px;
             position: fixed; /* ヘッダーを固定 */
             top: 0;
-            left: 0; /* 左端に固定 */
-            width: 100%; /* 幅を100%に */
-            box-sizing: border-box; /* paddingが幅に影響しないように */
-            z-index: 1000; /* 最前面に表示 */
+            left: 0;
+            width: 100%;
+            box-sizing: border-box;
+            z-index: 1000;
             background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2073&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center;
             background-size: cover;
             backdrop-filter: blur(15px); /* ぼかし効果で背景が透ける */
@@ -75,7 +75,7 @@
             text-decoration: none;
             margin: 0 15px;
             font-family: 'Raleway', sans-serif;
-            font-size: 16px; /* タブの文字サイズ */
+            font-size: 16px;
             font-weight: 400;
             text-transform: lowercase;
             transition: color 0.3s ease, transform 0.2s ease;
@@ -94,7 +94,6 @@
             padding: 80px 20px;
             text-align: center;
             margin-top: 110px; /* ヘッダーの高さに合わせて調整（ヘッダーの高さ約110px） */
-            display: none;
             min-height: 80vh;
             position: relative;
             background: url('mixing-console.jpg') no-repeat center center;
@@ -109,9 +108,6 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.5); /* セクションに暗いオーバーレイ */
             z-index: 0;
-        }
-        section.active {
-            display: block;
         }
         section h2 {
             font-family: 'Orbitron', sans-serif;
@@ -133,80 +129,6 @@
         .content-wrapper {
             position: relative;
             z-index: 1;
-        }
-        /* フォームのスタイル */
-        form {
-            max-width: 600px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        }
-        form h2 {
-            text-align: center;
-            color: #e0e0e0;
-            margin-bottom: 1.5rem;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 28px;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-        }
-        label {
-            display: block;
-            margin-top: 1rem;
-            color: #e0e0e0;
-            font-family: 'Raleway', sans-serif;
-            font-size: 14px;
-            font-weight: bold;
-        }
-        input[type="text"], input[type="url"], select, textarea {
-            width: 100%;
-            padding: 0.75rem;
-            margin-top: 0.5rem;
-            border: 1px solid #444;
-            border-radius: 5px;
-            background: rgba(255, 255, 255, 0.1);
-            color: #e0e0e0;
-            font-family: 'Roboto', sans-serif;
-            font-size: 1rem;
-            box-sizing: border-box;
-            transition: border 0.3s ease;
-        }
-        input[type="text"]:focus, input[type="url"]:focus, select:focus, textarea:focus {
-            border: 1px solid #e0e0e0;
-            outline: none;
-        }
-        textarea {
-            height: 150px;
-            resize: none;
-        }
-        button[type="submit"] {
-            background-color: #6c63ff;
-            color: white;
-            border: none;
-            padding: 0.75rem 1.5rem;
-            font-size: 1rem;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 1.5rem;
-            display: block;
-            width: 100%;
-            font-family: 'Raleway', sans-serif;
-            font-weight: 700;
-            text-transform: uppercase;
-            transition: background-color 0.3s ease, transform 0.1s ease;
-        }
-        button[type="submit"]:hover {
-            background-color: #574fd6;
-            transform: translateY(-2px);
-        }
-        #estimate {
-            margin-top: 1rem;
-            color: #e0e0e0;
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-align: right;
-            font-family: 'Raleway', sans-serif;
         }
         footer {
             background: rgba(0, 0, 0, 0.3);
@@ -232,7 +154,7 @@
         @media (max-width: 768px) {
             nav a {
                 margin: 0 10px;
-                font-size: 14px; /* モバイルでもタブの文字サイズを少し大きく */
+                font-size: 14px;
             }
             section {
                 padding: 40px 15px;
@@ -252,127 +174,20 @@
     <header>
         <h1>STUDIO BUN</h1>
         <nav>
-            <a onclick="showSection('home')" class="active">home</a>
-            <a onclick="showSection('profile')">profile</a>
-            <a onclick="showSection('works')">works</a>
-            <a onclick="showSection('price')">price</a>
-            <a onclick="showSection('form')">form</a>
-            <a onclick="showSection('contact')">contact</a>
+            <a href="index.html" class="active">home</a>
+            <a href="profile.html">profile</a>
+            <a href="works.html">works</a>
+            <a href="price.html">price</a>
+            <a href="form.html">form</a>
+            <a href="contact.html">contact</a>
         </nav>
     </header>
 
-    <!-- 各セクション -->
-    <section id="home" class="active">
+    <!-- ホームセクション -->
+    <section>
         <div class="content-wrapper">
             <h2>HOME</h2>
             <p>あなたの音楽を次のレベルへ。プロフェッショナルなミックスで最高のサウンドを。</p>
-        </div>
-    </section>
-
-    <section id="profile">
-        <div class="content-wrapper">
-            <h2>Profile</h2>
-            <p>10年以上の経験を持つミックスエンジニア。世界基準のサウンドをあなたに届けます。</p>
-        </div>
-    </section>
-
-    <section id="works">
-        <div class="content-wrapper">
-            <h2>Works</h2>
-            <p>これまでに手掛けた作品の一部。ポップ、ロック、ヒップホップなど幅広いジャンルに対応。</p>
-        </div>
-    </section>
-
-    <section id="price">
-        <div class="content-wrapper">
-            <h2>Price</h2>
-            <p>高品質なミックスをリーズナブルな価格で。詳細はお気軽にお問い合わせください。</p>
-            <ul style="list-style: none; padding: 0;">
-                <li>1曲ミックス: ¥15,000</li>
-                <li>アルバム（10曲）: ¥120,000</li>
-                <li>マスタリング追加: ¥5,000/曲</li>
-            </ul>
-        </div>
-    </section>
-
-    <section id="form">
-        <div class="content-wrapper">
-            <form action="https://formsubmit.co/buxuxuq@gmail.com" method="POST">
-                <h2>🎷 Mix依頼フォーム</h2>
-
-                <label>お名前（HN可）</label>
-                <input type="text" name="name" required>
-
-                <label>ご連絡先（メールアドレスやSNSのID）</label>
-                <input type="text" name="contact" required>
-
-                <label>ご希望プラン</label>
-                <select name="plan" id="plan" required>
-                    <option value="プラン1">プラン1（5,000円）</option>
-                    <option value="プラン2">プラン2（8,000円）</option>
-                    <option value="プラン3">プラン3（3,000円）</option>
-                    <option value="プラン4">プラン4（3,000円）</option>
-                    <option value="プラン5">プラン5（3,000円）</option>
-                    <option value="プラン6">プラン6（6,000円）</option>
-                </select>
-
-                <label>曲名（原曲URL）</label>
-                <input type="text" name="title_url" required>
-
-                <label>音源URL（ギガファイル便など）</label>
-                <input type="url" name="audio_url" required>
-
-                <label>参考曲URL（任意）</label>
-                <input type="url" name="ref_url">
-
-                <label>トラック数</label>
-                <label>メイントラック</label>
-                <select name="main_track" id="main_track">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-
-                <label>ハモリトラック</label>
-                <select name="harmony_track" id="harmony_track">
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-
-                <label>その他(コーラスや合いの手など)</label>
-                <select name="other_track" id="other_track">
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-
-                <div id="estimate">お見積り金額: 計算中...</div>
-
-                <label>その他要望</label>
-                <textarea name="message" rows="5" placeholder="エフェクトや納期のご相談などあればどうぞ"></textarea>
-
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_subject" value="STUDIO BUN - 新しいミックス依頼">
-                <input type="hidden" name="_next" value="https://buxuxun.github.io/github.io/thanks">
-
-                <button type="submit">送信する</button>
-            </form>
-        </div>
-    </section>
-
-    <section id="contact">
-        <div class="content-wrapper">
-            <h2>Contact</h2>
-            <p>メール: mixmaster@studio.com | 電話: 123-456-7890</p>
         </div>
     </section>
 
@@ -385,55 +200,5 @@
         </div>
         <p>© 2025 STUDIO BUN. All rights reserved.</p>
     </footer>
-
-    <!-- JavaScriptでタブ切り替え -->
-    <script>
-        function showSection(sectionId) {
-            document.querySelectorAll('section').forEach(section => {
-                section.classList.remove('active');
-            });
-            document.querySelectorAll('nav a').forEach(link => {
-                link.classList.remove('active');
-            });
-            document.getElementById(sectionId).classList.add('active');
-            document.querySelector(`nav a[onclick="showSection('${sectionId}')"]`).classList.add('active');
-        }
-
-        // 初期表示でHOMEを表示
-        showSection('home');
-    </script>
-
-    <!-- フォームのお見積り計算スクリプト -->
-    <script>
-        function calculateEstimate() {
-            const planPrices = {
-                "プラン1": 5000,
-                "プラン2": 8000,
-                "プラン3": 3000,
-                "プラン4": 3000,
-                "プラン5": 3000,
-                "プラン6": 6000
-            };
-
-            const plan = document.getElementById("plan").value;
-            const mainTrack = parseInt(document.getElementById("main_track").value);
-            const harmonyTrack = parseInt(document.getElementById("harmony_track").value);
-            const otherTrack = parseInt(document.getElementById("other_track").value);
-
-            let total = planPrices[plan];
-            total += (mainTrack > 1) ? (mainTrack - 1) * 1000 : 0;
-            total += (harmonyTrack > 1) ? (harmonyTrack - 1) * 1000 : 0;
-            total += (otherTrack > 0) ? (otherTrack) * 1000 : 0;
-
-            document.getElementById("estimate").textContent = `お見積り金額: ${total.toLocaleString()}円`;
-        }
-
-        document.getElementById("plan").addEventListener("change", calculateEstimate);
-        document.getElementById("main_track").addEventListener("change", calculateEstimate);
-        document.getElementById("harmony_track").addEventListener("change", calculateEstimate);
-        document.getElementById("other_track").addEventListener("change", calculateEstimate);
-
-        calculateEstimate();
-    </script>
 </body>
 </html>
