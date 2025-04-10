@@ -16,6 +16,7 @@
             color: #e0e0e0;
             line-height: 1.6;
             position: relative;
+            height: 100vh; /* body全体を画面高さに */
         }
         body::before {
             content: '';
@@ -119,23 +120,24 @@
             top: 0;
             left: -300px;
             width: 250px;
-            height: 100%; /* 画面いっぱいに */
+            height: 100vh; /* 画面全体の高さに */
             background: #333333;
-            padding: 60px 20px 20px;
+            padding: 60px 10px 10px; /* パディング調整 */
             box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
             transition: left 0.3s ease;
             z-index: 1001;
             overflow-y: auto;
-            display: grid; /* 2列表示 */
+            display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
+            gap: 15px; /* メニュー間の間隔 */
+            align-content: start; /* 上から詰めて配置 */
         }
         #sidebar a {
             color: #e0e0e0;
             text-decoration: none;
             font-family: 'Raleway', sans-serif;
             font-size: 18px;
-            padding: 10px;
+            padding: 15px; /* メニュー項目の高さ調整 */
             border-radius: 5px;
             transition: background 0.3s ease, color 0.3s ease;
             cursor: pointer;
@@ -397,7 +399,8 @@
                 display: block;
             }
             #sidebar {
-                display: grid; /* スマホでも2列 */
+                display: grid;
+                height: 100vh; /* スマホでも画面全体 */
             }
             section {
                 padding: 40px 15px 80px;
@@ -759,7 +762,7 @@
             });
 
             sidebar.addEventListener("touchend", () => {
-                if (touchStartX - touchEndX > 50 && sidebar.classList.contains("open")) { // 左に50px以上スワイプ
+                if (touchStartX - touchEndX > 50 && sidebar.classList.contains("open")) {
                     toggleSidebar();
                 }
             });
