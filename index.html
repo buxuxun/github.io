@@ -87,7 +87,7 @@
         }
         nav a.active {
             color: #ffffff;
-            font-weight:I 700;
+            font-weight: 700;
             border-bottom: 2px solid #ffffff;
         }
         section {
@@ -142,8 +142,8 @@
         }
         /* プロフィール画像のスタイル */
         .profile-image {
-            width: 150px;
-            height: 150px;
+            width: 225px; /* 150px × 1.5 */
+            height: 225px; /* 150px × 1.5 */
             border-radius: 50%; /* 円形に切り取り */
             object-fit: cover; /* 画像が枠にフィットするように */
             margin: 20px auto;
@@ -235,7 +235,7 @@
         }
         #estimate {
             position: fixed;
-            top: 120px; /* ヘッダーの高さに合わせて調整 */
+            top: 130px; /* ヘッダーの高さ（110px）+余白（20px） */
             right: 20px;
             background: rgba(0, 0, 0, 0.8);
             color: #e0e0e0;
@@ -303,7 +303,7 @@
                 height: auto;
             }
             #estimate {
-                top: 100px; /* モバイルではヘッダーが小さくなるので調整 */
+                top: 110px; /* モバイルではヘッダーが小さくなる（90px）+余白（20px） */
                 right: 10px;
                 font-size: 1rem;
                 padding: 8px 15px;
@@ -357,11 +357,8 @@
             <h2>Works</h2>
             <p>主な過去の担当作品。<br>星街すいせい／めいちゃん／花園セレナ／春茶 etc..</p>
             <!-- YouTube動画の一覧 -->
-            <div class="youtube-videos">
-                <!-- 仮のYouTube動画（実際の動画IDに置き換えてください） -->
-                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
-                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
-                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+            <div class="youtube-videos" id="youtube-videos">
+                <!-- ここにJavaScriptで動画を挿入 -->
             </div>
         </div>
     </section>
@@ -558,6 +555,8 @@
                     newSection.classList.add('active');
                     newContent.classList.add('active');
                     newContent.style.opacity = '1';
+                    // スクロール位置をトップにリセット
+                    window.scrollTo(0, 0);
                 }, 50); // わずかな遅延でスムーズに
 
                 // 対応するナビリンクにactiveクラスを追加
@@ -567,6 +566,55 @@
 
         // 初期表示でHOMEを表示
         showSection('home');
+    </script>
+
+    <!-- YouTube動画のランダム表示スクリプト -->
+    <script>
+        // YouTube動画のURLリスト
+        const youtubeVideos = [
+            "https://www.youtube.com/embed/8zi1M5N3XEU",
+            "https://www.youtube.com/embed/7mWHhj0VPJk",
+            "https://www.youtube.com/embed/bE2oZdUH_ps",
+            "https://www.youtube.com/embed/T8keafqE69o",
+            "https://www.youtube.com/embed/yulgfpaPSBA",
+            "https://www.youtube.com/embed/Hb7uAtVgBmA"
+        ];
+
+        // 配列をシャッフルする関数（Fisher-Yatesアルゴリズム）
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]]; // 要素を交換
+            }
+            return array;
+        }
+
+        // YouTube動画を表示する関数
+        function displayYouTubeVideos() {
+            const container = document.getElementById("youtube-videos");
+            container.innerHTML = ""; // 既存の動画をクリア
+
+            // 動画リストをシャッフル
+            const shuffledVideos = shuffleArray([...youtubeVideos]);
+
+            // シャッフルされた動画を挿入
+            shuffledVideos.forEach(videoUrl => {
+                const iframe = document.createElement("iframe");
+                iframe.src = videoUrl;
+                iframe.allowFullscreen = true;
+                container.appendChild(iframe);
+            });
+        }
+
+        // ページ読み込み時とworksタブ表示時に動画をランダム表示
+        document.addEventListener("DOMContentLoaded", () => {
+            if (document.getElementById("works").classList.contains("active")) {
+                displayYouTubeVideos();
+            }
+        });
+
+        // worksタブが表示されたときに動画をランダム表示
+        document.getElementById("works").addEventListener("click", displayYouTubeVideos);
     </script>
 
     <!-- フォームのお見積り計算スクリプト -->
