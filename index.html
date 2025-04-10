@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STUDIO BUN - ありがとうございます</title>
+    <title>STUDIO BUN</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Raleway:wght@300;400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
@@ -119,7 +119,7 @@
             top: 0;
             left: -300px;
             width: 250px;
-            height: 100%;
+            height: 100%; /* 縦いっぱいに */
             background: #333333;
             padding: 60px 20px 20px;
             box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
@@ -170,6 +170,7 @@
             padding: 80px 20px 120px;
             text-align: center;
             margin-top: 110px;
+            display: none;
             min-height: calc(100vh - 230px);
             position: relative;
             background: url('images/mixing-console.jpg') no-repeat center center;
@@ -185,6 +186,9 @@
             background: rgba(0, 0, 0, 0.7);
             z-index: 0;
         }
+        section.active {
+            display: block;
+        }
         section h2 {
             font-family: 'Orbitron', sans-serif;
             font-weight: 700;
@@ -196,7 +200,7 @@
             z-index: 1;
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
         }
-        section p {
+        section p, section ul, section form {
             max-width: 700px;
             margin: 0 auto 30px;
             position: relative;
@@ -211,6 +215,130 @@
         }
         .content-wrapper.active {
             opacity: 1;
+        }
+        .profile-image {
+            width: 225px;
+            height: 225px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 20px auto;
+            display: block;
+            border: 2px solid #e0e0e0;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+        .youtube-videos {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .youtube-videos iframe {
+            width: 100%;
+            height: 169px;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+        form h2 {
+            text-align: center;
+            color: #e0e0e0;
+            margin-bottom: 1.5rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 28px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+        label {
+            display: block;
+            margin-top: 1rem;
+            color: #e0e0e0;
+            font-family: 'Raleway', sans-serif;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="url"], select, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            margin-top: 0.5rem;
+            border: 1px solid #444;
+            border-radius: 5px;
+            background: #ffffff;
+            color: #333333;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: border 0.3s ease;
+        }
+        input[type="text"]:focus, input[type="url"]:focus, select:focus, textarea:focus {
+            border: 1px solid #e0e0e0;
+            outline: none;
+        }
+        textarea {
+            height: 150px;
+            resize: none;
+        }
+        button[type="submit"] {
+            background-color: #6c63ff;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 1.5rem;
+            display: block;
+            width: 100%;
+            font-family: 'Raleway', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+        }
+        button[type="submit"]:hover {
+            background-color: #574fd6;
+            transform: translateY(-2px);
+        }
+        #estimate {
+            position: fixed;
+            bottom: 40px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            color: #e0e0e0;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            font-family: 'Raleway', sans-serif;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            z-index: 1002;
+            display: none;
+        }
+        #estimate.active {
+            display: block;
+        }
+        #collab-members {
+            max-height: 0;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        #collab-members.show {
+            max-height: 100px;
+            opacity: 1;
+            transform: translateY(0);
         }
         footer {
             background: rgba(0, 0, 0, 0.3);
@@ -232,6 +360,14 @@
         }
         .social-icons a:hover {
             color: #e0e0e0;
+        }
+        #contact a {
+            color: #e67e22;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        #contact a:hover {
+            color: #ff9f43;
         }
         @media (max-width: 768px) {
             #desktop-nav {
@@ -256,6 +392,16 @@
                 font-size: 28px;
                 margin-right: 50px;
             }
+            .youtube-videos {
+                grid-template-columns: 1fr;
+            }
+            .youtube-videos iframe {
+                width: 100%;
+                height: auto;
+            }
+            form {
+                margin-right: 0;
+            }
         }
     </style>
 </head>
@@ -263,12 +409,12 @@
     <header>
         <h1>STUDIO BUN</h1>
         <nav id="desktop-nav">
-            <a href="index.html#home" class="active">home</a>
-            <a href="index.html#profile">profile</a>
-            <a href="index.html#works">works</a>
-            <a href="index.html#price">price</a>
-            <a href="index.html#form">form</a>
-            <a href="index.html#contact">contact</a>
+            <a onclick="showSection('home')" class="active">home</a>
+            <a onclick="showSection('profile')">profile</a>
+            <a onclick="showSection('works')">works</a>
+            <a onclick="showSection('price')">price</a>
+            <a onclick="showSection('form')">form</a>
+            <a onclick="showSection('contact')">contact</a>
         </nav>
         <div class="hamburger" onclick="toggleSidebar()">
             <span></span>
@@ -276,22 +422,181 @@
             <span></span>
         </div>
         <nav id="sidebar">
-            <a href="index.html#home" class="active">home</a>
-            <a href="index.html#profile">profile</a>
-            <a href="index.html#works">works</a>
-            <a href="index.html#price">price</a>
-            <a href="index.html#form">form</a>
-            <a href="index.html#contact">contact</a>
+            <a onclick="showSection('home')" class="active">home</a>
+            <a onclick="showSection('profile')">profile</a>
+            <a onclick="showSection('works')">works</a>
+            <a onclick="showSection('price')">price</a>
+            <a onclick="showSection('form')">form</a>
+            <a onclick="showSection('contact')">contact</a>
         </nav>
         <div id="overlay" onclick="toggleSidebar()"></div>
     </header>
 
-    <section id="thanks" class="active">
+    <section id="home" class="active">
         <div class="content-wrapper active">
-            <h2>ありがとうございます</h2>
-            <p>ご依頼いただき、誠にありがとうございます。</p>
-            <p>ご依頼内容の確認と仮のお見積金額をフォームにご入力いただいた内容に基づいて計算しております。</p>
-            <p>届いた情報を確認後、正確なお見積りを作成し、こちらからXのDMにてご連絡いたします。少々お待ちください。</p>
+            <h2>HOME</h2>
+            <p>あなたの音楽を次のレベルへ。プロフェッショナルなミックスで最高のサウンドを。</p>
+        </div>
+    </section>
+
+    <section id="profile">
+        <div class="content-wrapper">
+            <h2>Profile</h2>
+            <p>
+                2011年から歌ってみたMIXを中心に活動。<br><br>
+                音楽専門学校レコーディング科を卒業後、<br>
+                レコーディングスタジオ勤務を経てミキシングエンジニアとして独立。<br><br>
+                星街すいせい／めいちゃん／花園セレナ／春茶 等数多くのミックスを担当し、<br>
+                初投稿のサポートなども積極的に行っている。<br><br>
+                過去1000件以上のミックスを担当。
+            </p>
+            <img src="images/profile.jpg" alt="Profile Image" class="profile-image">
+        </div>
+    </section>
+
+    <section id="works">
+        <div class="content-wrapper">
+            <h2>Works</h2>
+            <p>主な過去の担当作品。<br>星街すいせい／めいちゃん／花園セレナ／春茶 etc..</p>
+            <div class="youtube-videos" id="youtube-videos"></div>
+        </div>
+    </section>
+
+    <section id="price">
+        <div class="content-wrapper">
+            <h2>Price</h2>
+            <p>基本料金：フルコーラス￥7,000 / ワンコーラス￥5,000</p>
+            <p>納期オプション：3日（+￥3,000） / 1週間（+￥2,000） / 2週間（+￥0）</p>
+            <p>コラボ：2人から選択可能、1人増えるごとに+￥3,000（例：コラボ2人の場合、基本料金+￥3,000、3人の場合+￥6,000）</p>
+            <p>追加料金：</p>
+            <ul>
+                <li>メイントラック：1本目無料、2本目以降1本につき+￥1,000（コラボありの場合はコラボ人数分まで無料、例：コラボ2人なら2本まで無料）</li>
+                <li>ハモリトラック：1本目無料、2本目以降1本につき+￥1,000（コラボありの場合はコラボ人数分まで無料、例：コラボ2人なら2本まで無料）</li>
+                <li>ハモリ作成：1本目から1本につき+￥1,000</li>
+                <li>その他（コーラス、合いの手など）：1本目から1本につき+￥1,000</li>
+            </ul>
+            <p><strong style="font-size: 1.2rem;">お支払いについて</strong></p>
+            <p>お支払いを確認させていただいてから、作業開始いたします。<br>※お支払い方法は現金振込とさせていただきます。</p>
+            <p>詳細なお見積りはフォームにてご確認ください。</p>
+        </div>
+    </section>
+
+    <section id="form">
+        <div class="content-wrapper">
+            <form action="https://formsubmit.co/buxuxuq@gmail.com" method="POST">
+                <h2>Form</h2>
+                <label>お名前（HN可）</label>
+                <input type="text" name="name" required>
+                <label>ご連絡先（メールアドレスやSNSのID）</label>
+                <input type="text" name="contact" required>
+                <label>基本料金</label>
+                <select name="base_price" id="base_price" required>
+                    <option value="フルコーラス">フルコーラス（￥7,000）</option>
+                    <option value="ワンコーラス">ワンコーラス（￥5,000）</option>
+                </select>
+                <label>納期</label>
+                <select name="delivery" id="delivery" required>
+                    <option value="2週間">2週間（+￥0）</option>
+                    <option value="1週間">1週間（+￥2,000）</option>
+                    <option value="3日">3日（+￥3,000）</option>
+                </select>
+                <label>コラボの有無</label>
+                <select name="collab" id="collab" required>
+                    <option value="なし">コラボなし</option>
+                    <option value="あり">コラボあり</option>
+                </select>
+                <div id="collab-members">
+                    <label>コラボ人数（1人増えるごとに+￥3,000）</label>
+                    <select name="collab_members" id="collab_members">
+                        <option value="2">2人</option>
+                        <option value="3">3人</option>
+                        <option value="4">4人</option>
+                        <option value="5">5人</option>
+                        <option value="6">6人</option>
+                        <option value="7">7人</option>
+                        <option value="8">8人</option>
+                        <option value="9">9人</option>
+                        <option value="10">10人</option>
+                    </select>
+                </div>
+                <label>曲名（原曲URL）</label>
+                <input type="text" name="title_url" required>
+                <label>音源URL（ギガファイル便など）</label>
+                <input type="url" name="audio_url" required>
+                <label>参考曲URL（任意）</label>
+                <input type="url" name="ref_url">
+                <label>トラック数</label>
+                <label>メイントラック（2本目以降1本につき+￥1,000、コラボありならコラボ人数分まで無料）</label>
+                <select name="main_track" id="main_track">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+                <label>ハモリトラック（2本目以降1本につき+￥1,000、コラボありならコラボ人数分まで無料）</label>
+                <select name="harmony_track" id="harmony_track">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+                <label>ハモリトラック作成（1本につき+￥1,000）</label>
+                <select name="harmony_creation" id="harmony_creation">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+                <label>その他(コーラスや合いの手など)（1本につき+￥1,000）</label>
+                <select name="other_track" id="other_track">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+                <label>その他要望</label>
+                <textarea name="message" rows="5" placeholder="エフェクトや納期のご相談などあればどうぞ"></textarea>
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_subject" value="STUDIO BUN - 新しいミックス依頼">
+                <input type="hidden" name="_next" value="thanks.html">
+                <button type="submit">送信する</button>
+            </form>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="content-wrapper">
+            <h2>Contact</h2>
+            <p>何かご不明な点ございましたら、直接XのDMからご連絡していただけたらと思います。</p>
+            <p>企業様は、直接メールにてご連絡ください。</p>
+            <p>X(旧Twitter): <a href="https://twitter.com/buxun" target="_blank">@buxun</a></p><p>メールアドレス: <a href="mailto:buxuxuq@gmail.com">buxuxuq@gmail.com</a></p>
         </div>
     </section>
 
@@ -304,7 +609,39 @@
         <p>© 2025 STUDIO BUN. All rights reserved.</p>
     </footer>
 
+    <div id="estimate">お見積り金額: 計算中...</div>
+
     <script>
+        const youtubeVideos = [
+            "https://www.youtube.com/embed/8zi1M5N3XEU",
+            "https://www.youtube.com/embed/7mWHhj0VPJk",
+            "https://www.youtube.com/embed/bE2oZdUH_ps",
+            "https://www.youtube.com/embed/T8keafqE69o",
+            "https://www.youtube.com/embed/yulgfpaPSBA",
+            "https://www.youtube.com/embed/Hb7uAtVgBmA"
+        ];
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function displayYouTubeVideos() {
+            const container = document.getElementById("youtube-videos");
+            if (!container) return;
+            container.innerHTML = "";
+            const shuffledVideos = shuffleArray([...youtubeVideos]);
+            shuffledVideos.forEach(videoUrl => {
+                const iframe = document.createElement("iframe");
+                iframe.src = videoUrl;
+                iframe.allowFullscreen = true;
+                container.appendChild(iframe);
+            });
+        }
+
         function toggleSidebar() {
             const sidebar = document.getElementById("sidebar");
             const overlay = document.getElementById("overlay");
@@ -312,6 +649,129 @@
             overlay.classList.toggle("active");
             console.log("Sidebar toggled:", sidebar.classList.contains("open") ? "open" : "closed");
         }
+
+        function showSection(sectionId) {
+            console.log(`Showing section: ${sectionId}`);
+            const currentSection = document.querySelector('section.active');
+            const currentContent = currentSection ? currentSection.querySelector('.content-wrapper') : null;
+            if (currentContent) {
+                currentContent.style.opacity = '0';
+                currentContent.classList.remove('active');
+            }
+
+            setTimeout(() => {
+                document.querySelectorAll('section').forEach(section => {
+                    section.classList.remove('active');
+                    section.style.display = 'none';
+                });
+                document.querySelectorAll('#desktop-nav a').forEach(link => {
+                    link.classList.remove('active');
+                });
+                document.querySelectorAll('#sidebar a').forEach(link => {
+                    link.classList.remove('active');
+                });
+
+                const newSection = document.getElementById(sectionId);
+                if (!newSection) {
+                    console.error(`Section ${sectionId} not found!`);
+                    return;
+                }
+                const newContent = newSection.querySelector('.content-wrapper');
+                newSection.style.display = 'block';
+                setTimeout(() => {
+                    newSection.classList.add('active');
+                    newContent.classList.add('active');
+                    newContent.style.opacity = '1';
+                    window.scrollTo(0, 0);
+                    if (sectionId === 'works') {
+                        displayYouTubeVideos();
+                    }
+                    const estimate = document.getElementById('estimate');
+                    if (sectionId === 'form') {
+                        estimate.classList.add('active');
+                        calculateEstimate();
+                    } else {
+                        estimate.classList.remove('active');
+                    }
+                }, 50);
+
+                const desktopLink = document.querySelector(`#desktop-nav a[onclick="showSection('${sectionId}')"]`);
+                const sidebarLink = document.querySelector(`#sidebar a[onclick="showSection('${sectionId}')"]`);
+                if (desktopLink) desktopLink.classList.add('active');
+                if (sidebarLink) sidebarLink.classList.add('active');
+                else console.error(`Sidebar link for ${sectionId} not found!`);
+                document.getElementById("sidebar").classList.remove("open");
+                document.getElementById("overlay").classList.remove("active");
+            }, 500);
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const sidebarItems = document.querySelectorAll('#sidebar a');
+            console.log("Sidebar items loaded:", sidebarItems.length);
+            sidebarItems.forEach((item, index) => {
+                console.log(`Item ${index + 1}: ${item.textContent}`);
+            });
+            const hash = window.location.hash.substring(1);
+            showSection(hash || 'home');
+        });
+
+        function calculateEstimate() {
+            const basePrices = {
+                "フルコーラス": 7000,
+                "ワンコーラス": 5000
+            };
+            const deliveryFees = {
+                "3日": 3000,
+                "1週間": 2000,
+                "2週間": 0
+            };
+
+            const basePrice = document.getElementById("base_price").value;
+            const delivery = document.getElementById("delivery").value;
+            const collab = document.getElementById("collab").value;
+            const collabMembers = parseInt(document.getElementById("collab_members").value) || 0;
+            const mainTrack = parseInt(document.getElementById("main_track").value);
+            const harmonyTrack = parseInt(document.getElementById("harmony_track").value);
+            const harmonyCreation = parseInt(document.getElementById("harmony_creation").value);
+            const otherTrack = parseInt(document.getElementById("other_track").value);
+
+            let total = basePrices[basePrice];
+            total += deliveryFees[delivery];
+
+            if (collab === "あり") {
+                total += (collabMembers - 1) * 3000;
+            }
+
+            const freeTracks = (collab === "あり") ? collabMembers : 1;
+            total += (mainTrack > freeTracks) ? (mainTrack - freeTracks) * 1000 : 0;
+            total += (harmonyTrack > freeTracks) ? (harmonyTrack - freeTracks) * 1000 : 0;
+            total += (harmonyCreation > 0) ? (harmonyCreation) * 1000 : 0;
+            total += (otherTrack > 0) ? (otherTrack) * 1000 : 0;
+
+            document.getElementById("estimate").textContent = `お見積り金額: ${total.toLocaleString()}円`;
+        }
+
+        document.getElementById("collab").addEventListener("change", function() {
+            const collabMembersDiv = document.getElementById("collab-members");
+            if (this.value === "あり") {
+                collabMembersDiv.classList.add("show");
+            } else {
+                collabMembersDiv.classList.remove("show");
+            }
+            calculateEstimate();
+        });
+
+        document.getElementById("form").addEventListener("click", function() {
+            document.getElementById("base_price").addEventListener("change", calculateEstimate);
+            document.getElementById("delivery").addEventListener("change", calculateEstimate);
+            document.getElementById("collab").addEventListener("change", calculateEstimate);
+            document.getElementById("collab_members").addEventListener("change", calculateEstimate);
+            document.getElementById("main_track").addEventListener("change", calculateEstimate);
+            document.getElementById("harmony_track").addEventListener("change", calculateEstimate);
+            document.getElementById("harmony_creation").addEventListener("change", calculateEstimate);
+            document.getElementById("other_track").addEventListener("change", calculateEstimate);
+            calculateEstimate();
+        });
     </script>
 </body>
 </html>
