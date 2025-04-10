@@ -34,13 +34,14 @@
             padding: 20px;
             position: fixed; /* ヘッダーを固定 */
             top: 0;
-            width: 100%;
-            z-index: 1000;
+            left: 0; /* 左端に固定 */
+            width: 100%; /* 幅を100%に */
+            box-sizing: border-box; /* paddingが幅に影響しないように */
+            z-index: 1000; /* 最前面に表示 */
             background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2073&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center;
             background-size: cover;
             backdrop-filter: blur(15px); /* ぼかし効果で背景が透ける */
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
         }
         header::before {
             content: '';
@@ -74,7 +75,7 @@
             text-decoration: none;
             margin: 0 15px;
             font-family: 'Raleway', sans-serif;
-            font-size: 16px; /* タブの文字サイズを大きく */
+            font-size: 16px; /* タブの文字サイズ */
             font-weight: 400;
             text-transform: lowercase;
             transition: color 0.3s ease, transform 0.2s ease;
