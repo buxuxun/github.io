@@ -119,7 +119,7 @@
             top: 0;
             left: -300px;
             width: 250px;
-            height: 100%; /* 縦いっぱいに */
+            height: 100%;
             background: #333333;
             padding: 60px 20px 20px;
             box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
@@ -312,7 +312,7 @@
         #estimate {
             position: fixed;
             bottom: 40px;
-            right: 10px;
+            right: 35%;
             background: rgba(0, 0, 0, 0.8);
             color: #e0e0e0;
             padding: 10px 20px;
@@ -475,15 +475,15 @@
                 <li>ハモリ作成：1本目から1本につき+￥1,000</li>
                 <li>その他（コーラス、合いの手など）：1本目から1本につき+￥1,000</li>
             </ul>
+            <p>詳細なお見積りはフォームにてご確認ください。</p>
             <p><strong style="font-size: 1.2rem;">お支払いについて</strong></p>
             <p>お支払いを確認させていただいてから、作業開始いたします。<br>※お支払い方法は現金振込とさせていただきます。</p>
-            <p>詳細なお見積りはフォームにてご確認ください。</p>
         </div>
     </section>
 
     <section id="form">
         <div class="content-wrapper">
-            <form action="https://formsubmit.co/buxuxuq@gmail.com" method="POST">
+            <form id="mixForm" action="https://formsubmit.co/buxuxuq@gmail.com" method="POST">
                 <h2>Form</h2>
                 <label>お名前（HN可）</label>
                 <input type="text" name="name" required>
@@ -585,7 +585,7 @@
                 <textarea name="message" rows="5" placeholder="エフェクトや納期のご相談などあればどうぞ"></textarea>
                 <input type="hidden" name="_captcha" value="false">
                 <input type="hidden" name="_subject" value="STUDIO BUN - 新しいミックス依頼">
-                <input type="hidden" name="_next" value="thanks.html">
+                <input type="hidden" name="_next" value="https://buxuxun.github.io/github.io/thanks.html">
                 <button type="submit">送信する</button>
             </form>
         </div>
@@ -712,7 +712,9 @@
                 console.log(`Item ${index + 1}: ${item.textContent}`);
             });
             const hash = window.location.hash.substring(1);
-            showSection(hash || 'home');
+            const validSections = ['home', 'profile', 'works', 'price', 'form', 'contact'];
+            const sectionToShow = validSections.includes(hash) ? hash : 'home';
+            showSection(sectionToShow);
         });
 
         function calculateEstimate() {
@@ -771,6 +773,29 @@
             document.getElementById("harmony_creation").addEventListener("change", calculateEstimate);
             document.getElementById("other_track").addEventListener("change", calculateEstimate);
             calculateEstimate();
+        });
+
+        document.getElementById("mixForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            console.log("Form submitted, sending to Formsubmit...");
+            
+            fetch("https://formsubmit.co/buxuxuq@gmail.com", {
+                method: "POST",
+                body: new FormData(this)
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log("Form successfully submitted, redirecting to thanks.html");
+                    window.location.href = "https://buxuxun.github.io/github.io/thanks.html";
+                } else {
+                    console.error("Form submission failed:", response.status);
+                    alert("送信に失敗しました。もう一度お試しください。");
+                }
+            })
+            .catch(error => {
+                console.error("Error during form submission:", error);
+                alert("エラーが発生しました。後でもう一度お試しください。");
+            });
         });
     </script>
 </body>
