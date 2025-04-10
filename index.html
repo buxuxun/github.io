@@ -125,6 +125,7 @@
             box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
             transition: left 0.3s ease;
             z-index: 1001;
+            display: flex;
             flex-direction: column;
             overflow-y: auto;
         }
@@ -138,7 +139,8 @@
             border-radius: 5px;
             transition: background 0.3s ease, color 0.3s ease;
             cursor: pointer;
-            display: block; /* 確実に全幅でクリック可能に */
+            display: block;
+            visibility: visible;
         }
         #sidebar a:hover {
             background: #555555;
@@ -309,7 +311,9 @@
             transform: translateY(-2px);
         }
         #estimate {
-            margin: 20px 0;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
             background: rgba(0, 0, 0, 0.8);
             color: #e0e0e0;
             padding: 10px 20px;
@@ -319,6 +323,7 @@
             font-family: 'Raleway', sans-serif;
             text-align: center;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            z-index: 1002;
         }
         #collab-members {
             max-height: 0;
@@ -394,9 +399,6 @@
             form {
                 margin-right: 0;
             }
-            #estimate {
-                margin: 20px 0;
-            }
         }
     </style>
 </head>
@@ -470,6 +472,8 @@
                 <li>ハモリ作成：1本目から1本につき+￥1,000</li>
                 <li>その他（コーラス、合いの手など）：1本目から1本につき+￥1,000</li>
             </ul>
+            <p><strong style="font-size: 1.2rem;">お支払いについて</strong></p>
+            <p>お支払いを確認させていただいてから、作業開始いたします。<br>※お支払い方法は現金振込とさせていただきます。</p>
             <p>詳細なお見積りはフォームにてご確認ください。</p>
         </div>
     </section>
@@ -512,7 +516,6 @@
                         <option value="10">10人</option>
                     </select>
                 </div>
-                <div id="estimate">お見積り金額: 計算中...</div>
                 <label>曲名（原曲URL）</label>
                 <input type="text" name="title_url" required>
                 <label>音源URL（ギガファイル便など）</label>
@@ -604,6 +607,8 @@
         <p>© 2025 STUDIO BUN. All rights reserved.</p>
     </footer>
 
+    <div id="estimate">お見積り金額: 計算中...</div>
+
     <script>
         const youtubeVideos = [
             "https://www.youtube.com/embed/8zi1M5N3XEU",
@@ -643,7 +648,7 @@
         }
 
         function showSection(sectionId) {
-            console.log(`showSection called with: ${sectionId}`);
+            console.log(`Showing section: ${sectionId}`);
             const currentSection = document.querySelector('section.active');
             const currentContent = currentSection ? currentSection.querySelector('.content-wrapper') : null;
             if (currentContent) {
@@ -664,6 +669,10 @@
                 });
 
                 const newSection = document.getElementById(sectionId);
+                if (!newSection) {
+                    console.error(`Section ${sectionId} not found!`);
+                    return;
+                }
                 const newContent = newSection.querySelector('.content-wrapper');
                 newSection.style.display = 'block';
                 setTimeout(() => {
@@ -687,6 +696,7 @@
         }
 
         document.addEventListener("DOMContentLoaded", () => {
+            console.log("Sidebar items:", document.querySelectorAll('#sidebar a').length);
             showSection('home');
         });
 
