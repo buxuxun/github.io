@@ -281,6 +281,12 @@
             box-sizing: border-box;
             transition: border 0.3s ease;
         }
+        input[type="text"]::placeholder, input[type="url"]::placeholder, textarea::placeholder {
+            color: #666666; /* プレースホルダーの文字色を薄く */
+        }
+        select.number-select {
+            width: 50%; /* 数字選択の幅を半分に */
+        }
         input[type="text"]:focus, input[type="url"]:focus, select:focus, textarea:focus {
             border: 1px solid #e0e0e0;
             outline: none;
@@ -312,7 +318,7 @@
         #estimate {
             position: fixed;
             bottom: 40px;
-            right: 30%; /* 35% → 30% に変更 */
+            right: 30%;
             background: rgba(0, 0, 0, 0.8);
             color: #e0e0e0;
             padding: 10px 20px;
@@ -344,7 +350,7 @@
             background: rgba(0, 0, 0, 0.3);
             color: #b0b0b0;
             text-align: center;
-            padding: 7.5px; /* 15px → 7.5px に変更 */
+            padding: 7.5px;
             position: fixed;
             bottom: 0;
             width: 100%;
@@ -403,7 +409,7 @@
                 margin-right: 0;
             }
             #estimate {
-                right: 10%; /* モバイルでは右端に近づける */
+                right: 10%;
             }
         }
     </style>
@@ -473,8 +479,8 @@
             <p>コラボ：1人増えるごとに+￥3,000（例：コラボ2人の場合、基本料金+￥3,000、3人の場合+￥6,000）</p>
             <p>追加料金：</p>
             <ul>
-                <li>メイントラック：1本目無料、2本目以降1本につき+￥1,000（コラボありの場合はコラボ人数分まで無料、例：コラボ2人なら2本まで無料）</li>
-                <li>ハモリトラック：1本目無料、2本目以降1本につき+￥1,000（コラボありの場合はコラボ人数分まで無料、例：コラボ2人なら2本まで無料）</li>
+                <li>メイントラック：1本目無料、2本目以降1本につき+￥1,000（コラボありの場合はコラボ人数分まで無料）</li>
+                <li>ハモリトラック：1本目無料、2本目以降1本につき+￥1,000（コラボありの場合はコラボ人数分まで無料）</li>
                 <li>ハモリ作成：1本目から1本につき+￥1,000</li>
                 <li>その他（コーラス、合いの手など）：1本目から1本につき+￥1,000</li>
             </ul>
@@ -493,24 +499,24 @@
                 <label>ご連絡先（XのIDもしくはメールアドレス）</label>
                 <input type="text" name="contact" placeholder="buxun" required>
                 <label>基本料金</label>
-                <select name="base_price" id="base_price" required>
+                <select name="base_price" id="base_price" class="number-select" required>
                     <option value="フルコーラス">フルコーラス（￥7,000）</option>
                     <option value="ワンコーラス">ワンコーラス（￥5,000）</option>
                 </select>
                 <label>納期</label>
-                <select name="delivery" id="delivery" required>
+                <select name="delivery" id="delivery" class="number-select" required>
                     <option value="2週間">2週間（+￥0）</option>
                     <option value="1週間">1週間（+￥2,000）</option>
                     <option value="3日">3日（+￥3,000）</option>
                 </select>
                 <label>コラボの有無</label>
-                <select name="collab" id="collab" required>
+                <select name="collab" id="collab" class="number-select" required>
                     <option value="なし">コラボなし</option>
                     <option value="あり">コラボあり</option>
                 </select>
                 <div id="collab-members">
                     <label>コラボ人数（1人増えるごとに+￥3,000）</label>
-                    <select name="collab_members" id="collab_members">
+                    <select name="collab_members" id="collab_members" class="number-select">
                         <option value="2">2人</option>
                         <option value="3">3人</option>
                         <option value="4">4人</option>
@@ -527,10 +533,10 @@
                 <label>音源URL（ギガファイル便など）</label>
                 <input type="url" name="audio_url" placeholder="https://gigafile.nu/" required>
                 <label>参考曲URL（任意）</label>
-                <input type="url" name="ref_url">
+                <input type="url" name="ref_url" placeholder="https://www.youtube.com/watch?v=BTboTXKWv80&ab">
                 <label>トラック数</label>
                 <label>メイントラック（2本目以降1本につき+￥1,000、コラボありならコラボ人数分まで無料）</label>
-                <select name="main_track" id="main_track">
+                <select name="main_track" id="main_track" class="number-select">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -543,7 +549,7 @@
                     <option value="10">10</option>
                 </select>
                 <label>ハモリトラック（2本目以降1本につき+￥1,000、コラボありならコラボ人数分まで無料）</label>
-                <select name="harmony_track" id="harmony_track">
+                <select name="harmony_track" id="harmony_track" class="number-select">
                     <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -557,7 +563,7 @@
                     <option value="10">10</option>
                 </select>
                 <label>ハモリトラック作成（1本につき+￥1,000）</label>
-                <select name="harmony_creation" id="harmony_creation">
+                <select name="harmony_creation" id="harmony_creation" class="number-select">
                     <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -571,7 +577,7 @@
                     <option value="10">10</option>
                 </select>
                 <label>その他(コーラスや合いの手など)（1本につき+￥1,000）</label>
-                <select name="other_track" id="other_track">
+                <select name="other_track" id="other_track" class="number-select">
                     <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -606,9 +612,10 @@
     <section id="thanks">
         <div class="content-wrapper">
             <h2>ありがとうございます</h2>
-            <p>ご依頼いただき、誠にありがとうございます。</p>
-            <p>ご依頼内容の確認と仮のお見積金額をフォームにご入力いただいた内容に基づいて計算しております。</p>
-            <p>届いた情報を確認後、正確なお見積りを作成し、通常3営業日以内にこちらからXのDMにてご連絡いたします。少々お待ちください。</p>
+            <p>ご依頼いただき、ありがとうございます。</p>
+            <p>入力していただいた情報から仮のお見積りをさせていただきましたのでご確認ください。</p>
+            <div id="form-summary"></div>
+            <p>アップロードしていただいた音源を確認後、正確なお見積りを作成し、こちらからご連絡いたします。</p>
         </div>
     </section>
 
@@ -763,6 +770,7 @@
             total += (otherTrack > 0) ? (otherTrack) * 1000 : 0;
 
             document.getElementById("estimate").textContent = `お見積り金額: ${total.toLocaleString()}円`;
+            return total; // フォーム送信時に使うために返す
         }
 
         document.getElementById("collab").addEventListener("change", function() {
@@ -790,14 +798,33 @@
         document.getElementById("mixForm").addEventListener("submit", function(e) {
             e.preventDefault();
             console.log("Form submitted, sending to Formsubmit...");
+
+            const formData = new FormData(this);
+            const formSummary = `
+                <p>お名前: ${formData.get("name")}</p>
+                <p>ご連絡先: ${formData.get("contact")}</p>
+                <p>基本料金: ${formData.get("base_price")}</p>
+                <p>納期: ${formData.get("delivery")}</p>
+                <p>コラボ: ${formData.get("collab")}${formData.get("collab") === "あり" ? ` (${formData.get("collab_members")}人)` : ""}</p>
+                <p>曲名（原曲URL）: ${formData.get("title_url")}</p>
+                <p>音源URL: ${formData.get("audio_url")}</p>
+                <p>参考曲URL: ${formData.get("ref_url") || "未入力"}</p>
+                <p>メイントラック: ${formData.get("main_track")}</p>
+                <p>ハモリトラック: ${formData.get("harmony_track")}</p>
+                <p>ハモリ作成: ${formData.get("harmony_creation")}</p>
+                <p>その他トラック: ${formData.get("other_track")}</p>
+                <p>その他要望: ${formData.get("message") || "なし"}</p>
+                <p>仮のお見積り: ${calculateEstimate().toLocaleString()}円</p>
+            `;
             
             fetch("https://formsubmit.co/buxuxuq@gmail.com", {
                 method: "POST",
-                body: new FormData(this)
+                body: formData
             })
             .then(response => {
                 if (response.ok) {
                     console.log("Form successfully submitted, showing thanks section");
+                    document.getElementById("form-summary").innerHTML = formSummary;
                     showSection('thanks');
                 } else {
                     console.error("Form submission failed:", response.status);
