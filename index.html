@@ -127,11 +127,12 @@
             z-index: 1;
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
         }
-        section p {
+        section p, section ul, section form {
             max-width: 700px;
             margin: 0 auto 30px;
             position: relative;
             z-index: 1;
+            text-align: left; /* タイトル以外を左寄せ */
         }
         .content-wrapper {
             position: relative;
@@ -339,6 +340,8 @@
                 どなたからの依頼も承りますが、基本的に有償とさせていただきます。<br>
                 ※下記プランは個人様向けのプランです。<br>
                 企業様は希望納期と金額を、企業様のほうからご提示ください。<br><br>
+               
+
                 <strong>料金プランについて</strong><br><br>
                 <strong>プラン1</strong><br>
                 通常の歌ってみたMIX（ピッチ補正、タイミング補正、マスタリング等含む）<br>
@@ -427,6 +430,16 @@
                     <option value="5">5</option>
                 </select>
 
+                <label>ハモリトラック作成（1本につき+1,000円）</label>
+                <select name="harmony_creation" id="harmony_creation">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+
                 <label>その他(コーラスや合いの手など)</label>
                 <select name="other_track" id="other_track">
                     <option value="0">0</option>
@@ -504,11 +517,16 @@
             const plan = document.getElementById("plan").value;
             const mainTrack = parseInt(document.getElementById("main_track").value);
             const harmonyTrack = parseInt(document.getElementById("harmony_track").value);
+            const harmonyCreation = parseInt(document.getElementById("harmony_creation").value);
             const otherTrack = parseInt(document.getElementById("other_track").value);
 
             let total = planPrices[plan];
-            total += (mainTrack > 1) ? (mainTrack - 1) * 1000 : 0;
-            total += (harmonyTrack > 0) ? (harmonyTrack) * 1000 : 0; // ハモリ作成は1本につき+1000円
+            // メインとハモリトラックの合計が2本を超える場合、超過分を追加料金として計算
+            const totalTracks = mainTrack + harmonyTrack;
+            total += (totalTracks > 2) ? (totalTracks - 2) * 1000 : 0;
+            // ハモリトラック作成の追加料金（1本から+1000円）
+            total += (harmonyCreation > 0) ? (harmonyCreation) * 1000 : 0;
+            // その他のトラック（コーラスや合いの手など）の追加料金
             total += (otherTrack > 0) ? (otherTrack) * 1000 : 0;
 
             document.getElementById("estimate").textContent = `お見積り金額: ${total.toLocaleString()}円`;
@@ -519,6 +537,7 @@
             document.getElementById("plan").addEventListener("change", calculateEstimate);
             document.getElementById("main_track").addEventListener("change", calculateEstimate);
             document.getElementById("harmony_track").addEventListener("change", calculateEstimate);
+            document.getElementById("harmony_creation").addEventListener("change", calculateEstimate);
             document.getElementById("other_track").addEventListener("change", calculateEstimate);
             calculateEstimate();
         });
