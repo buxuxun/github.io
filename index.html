@@ -5,137 +5,153 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ミックス依頼募集 - MixMaster Studio</title>
     <!-- Google Fontsのインポート -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <!-- Font Awesome for social icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         body {
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #1a1a1a; /* ダークグレー */
-            color: #e0e0e0; /* 明るいグレー */
+            background: url('https://images.unsplash.com/photo-1513635269975-59663e0ac514?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center fixed; /* ロンドンの夜景 */
+            background-size: cover;
+            color: #e0e0e0;
             line-height: 1.6;
+            position: relative;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7); /* 背景に暗いオーバーレイ */
+            z-index: -1;
         }
         header {
-            background: linear-gradient(135deg, #2c2c2c, #1a1a1a); /* グラデーション背景 */
-            padding: 20px;
             text-align: center;
+            padding: 20px;
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* ヘッダーに影 */
         }
         header h1 {
             font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            color: #d4af37; /* ゴールド */
+            font-weight: 700;
+            color: #ffffff;
+            font-size: 36px;
             margin: 0;
-            font-size: 28px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
         nav {
             margin: 15px 0;
         }
         nav a {
-            color: #e0e0e0;
+            color: #b0b0b0;
             text-decoration: none;
             margin: 0 20px;
             font-family: 'Montserrat', sans-serif;
             font-size: 16px;
-            position: relative;
+            text-transform: uppercase;
             transition: color 0.3s ease;
             cursor: pointer;
         }
         nav a:hover {
-            color: #d4af37; /* ゴールドに変化 */
-        }
-        nav a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            background: #d4af37;
-            bottom: -5px;
-            left: 0;
-            transition: width 0.3s ease;
-        }
-        nav a:hover::after {
-            width: 100%; /* ホバー時に下線が伸びるアニメーション */
+            color: #ffffff;
         }
         nav a.active {
-            color: #d4af37;
-            font-weight: 600;
-        }
-        nav a.active::after {
-            width: 100%; /* アクティブなタブに下線 */
+            color: #ffffff;
+            font-weight: 700;
+            border-bottom: 2px solid #ffffff;
         }
         section {
-            padding: 60px 20px;
+            padding: 80px 20px;
             text-align: center;
-            margin-top: 120px; /* ヘッダーの高さ分余白 */
+            margin-top: 120px;
             display: none;
-            background: #252525; /* セクション背景 */
-            border-radius: 15px;
-            margin: 120px auto 60px;
-            max-width: 900px; /* コンテンツ幅を制限 */
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* 立体感 */
+            min-height: 80vh;
         }
         section.active {
             display: block;
         }
         section h2 {
             font-family: 'Montserrat', sans-serif;
-            color: #d4af37;
+            font-weight: 700;
+            color: #ffffff;
             font-size: 32px;
             margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+        section p {
+            max-width: 700px;
+            margin: 0 auto 30px;
         }
         .hero-image {
             width: 100%;
-            max-width: 700px;
+            max-width: 1100px;
             height: auto;
-            margin: 20px auto;
+            margin: 40px auto;
             display: block;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
         }
         form input, form textarea {
             width: 100%;
-            max-width: 500px;
-            padding: 10px;
+            max-width: 600px;
+            padding: 12px;
             margin: 10px auto;
-            border: none;
+            border: 1px solid #444;
             border-radius: 5px;
-            background: #333;
+            background: rgba(255, 255, 255, 0.1);
             color: #e0e0e0;
             font-family: 'Roboto', sans-serif;
+            transition: border 0.3s ease;
+        }
+        form input:focus, form textarea:focus {
+            border: 1px solid #ffffff;
+            outline: none;
         }
         form textarea {
             height: 150px;
             resize: none;
         }
         form button {
-            padding: 10px 30px;
+            padding: 12px 40px;
             border: none;
             border-radius: 5px;
-            background: linear-gradient(135deg, #d4af37, #b8972f);
-            color: #1a1a1a;
+            background: #ffffff;
+            color: #000;
             font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
+            font-weight: 700;
+            text-transform: uppercase;
             cursor: pointer;
-            transition: transform 0.1s ease, background 0.3s ease;
+            transition: background 0.3s ease, transform 0.1s ease;
         }
         form button:hover {
-            transform: scale(1.05); /* ホバー時に少し大きく */
-            background: linear-gradient(135deg, #b8972f, #d4af37);
+            background: #e0e0e0;
+            transform: translateY(-2px);
         }
         footer {
-            background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
-            color: #e0e0e0;
+            background: rgba(0, 0, 0, 0.8);
+            color: #b0b0b0;
             text-align: center;
             padding: 15px;
             position: fixed;
             bottom: 0;
             width: 100%;
-            font-size: 14px;
+            backdrop-filter: blur(10px);
+        }
+        .social-icons a {
+            color: #b0b0b0;
+            margin: 0 10px;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+        .social-icons a:hover {
+            color: #ffffff;
         }
         /* レスポンシブ対応 */
         @media (max-width: 768px) {
@@ -145,10 +161,16 @@
             }
             section {
                 padding: 40px 15px;
-                margin: 100px auto 40px;
+                margin-top: 100px;
+            }
+            section h2 {
+                font-size: 28px;
             }
             header h1 {
-                font-size: 24px;
+                font-size: 28px;
+            }
+            .hero-image {
+                max-width: 90%;
             }
         }
     </style>
@@ -170,25 +192,25 @@
     <!-- 各セクション -->
     <section id="home" class="active">
         <h2>HOME</h2>
-        <p>プロフェッショナルなミックス依頼を承ります。あなたの音楽を最高のクオリティに仕上げます！</p>
+        <p>あなたの音楽を次のレベルへ。プロフェッショナルなミックスで最高のサウンドを。</p>
         <!-- 画像をここに埋め込み -->
         <img src="mixing-console.jpg" alt="ミキシングコンソール" class="hero-image">
     </section>
 
     <section id="profile">
         <h2>Profile</h2>
-        <p>私は10年以上の経験を持つミックスエンジニアです。ジャンルを問わず、最高のサウンドを提供します。</p>
+        <p>10年以上の経験を持つミックスエンジニア。世界基準のサウンドをあなたに届けます。</p>
     </section>
 
     <section id="works">
         <h2>Works</h2>
-        <p>これまでに手掛けたミックス作品の一部をご紹介します。ポップ、ロック、EDMなど幅広いジャンルに対応可能です。</p>
+        <p>これまでに手掛けた作品の一部。ポップ、ロック、ヒップホップなど幅広いジャンルに対応。</p>
         <!-- ここにサンプル音源やリンクを追加可能 -->
     </section>
 
     <section id="price">
         <h2>Price</h2>
-        <p>ミックス依頼の料金表です。詳細はお気軽にお問い合わせください。</p>
+        <p>高品質なミックスをリーズナブルな価格で。詳細はお気軽にお問い合わせください。</p>
         <ul style="list-style: none; padding: 0;">
             <li>1曲ミックス: ¥15,000</li>
             <li>アルバム（10曲）: ¥120,000</li>
@@ -198,7 +220,7 @@
 
     <section id="form">
         <h2>Form</h2>
-        <p>ミックス依頼は以下のフォームからどうぞ。詳細をお聞かせください。</p>
+        <p>ミックス依頼はこちらから。ジャンルや納期など、詳細をお聞かせください。</p>
         <form>
             <input type="text" placeholder="お名前" required><br>
             <input type="email" placeholder="メールアドレス" required><br>
@@ -208,32 +230,3 @@
     </section>
 
     <section id="contact">
-        <h2>Contact</h2>
-        <p>メール: mixmaster@studio.com | 電話: 123-456-7890</p>
-    </section>
-
-    <!-- フッター -->
-    <footer>
-        <p>© 2025 MixMaster Studio. All rights reserved.</p>
-    </footer>
-
-    <!-- JavaScriptでタブ切り替え -->
-    <script>
-        function showSection(sectionId) {
-            // すべてのセクションとタブを非アクティブに
-            document.querySelectorAll('section').forEach(section => {
-                section.classList.remove('active');
-            });
-            document.querySelectorAll('nav a').forEach(link => {
-                link.classList.remove('active');
-            });
-            // 選択したセクションとタブをアクティブに
-            document.getElementById(sectionId).classList.add('active');
-            document.querySelector(`nav a[onclick="showSection('${sectionId}')"]`).classList.add('active');
-        }
-
-        // 初期表示でHOMEを表示
-        showSection('home');
-    </script>
-</body>
-</html>
