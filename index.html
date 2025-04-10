@@ -585,7 +585,6 @@
                 <textarea name="message" rows="5" placeholder="エフェクトや納期のご相談などあればどうぞ"></textarea>
                 <input type="hidden" name="_captcha" value="false">
                 <input type="hidden" name="_subject" value="STUDIO BUN - 新しいミックス依頼">
-                <input type="hidden" name="_next" value="https://buxuxun.github.io/github.io/thanks.html">
                 <button type="submit">送信する</button>
             </form>
         </div>
@@ -596,7 +595,17 @@
             <h2>Contact</h2>
             <p>何かご不明な点ございましたら、直接XのDMからご連絡していただけたらと思います。</p>
             <p>企業様は、直接メールにてご連絡ください。</p>
-            <p>X(旧Twitter): <a href="https://twitter.com/buxun" target="_blank">@buxun</a></p><p>メールアドレス: <a href="mailto:buxuxuq@gmail.com">buxuxuq@gmail.com</a></p>
+            <p>X(旧Twitter): <a href="https://twitter.com/buxun" target="_blank">@buxun</a></p>
+            <p>メールアドレス: <a href="mailto:buxuxuq@gmail.com">buxuxuq@gmail.com</a></p>
+        </div>
+    </section>
+
+    <section id="thanks">
+        <div class="content-wrapper">
+            <h2>ありがとうございます</h2>
+            <p>ご依頼いただき、誠にありがとうございます。</p>
+            <p>ご依頼内容の確認と仮のお見積金額をフォームにご入力いただいた内容に基づいて計算しております。</p>
+            <p>届いた情報を確認後、正確なお見積りを作成し、通常3営業日以内にこちらからXのDMにてご連絡いたします。少々お待ちください。</p>
         </div>
     </section>
 
@@ -712,7 +721,7 @@
                 console.log(`Item ${index + 1}: ${item.textContent}`);
             });
             const hash = window.location.hash.substring(1);
-            const validSections = ['home', 'profile', 'works', 'price', 'form', 'contact'];
+            const validSections = ['home', 'profile', 'works', 'price', 'form', 'contact', 'thanks'];
             const sectionToShow = validSections.includes(hash) ? hash : 'home';
             showSection(sectionToShow);
         });
@@ -785,8 +794,8 @@
             })
             .then(response => {
                 if (response.ok) {
-                    console.log("Form successfully submitted, redirecting to thanks.html");
-                    window.location.href = "https://buxuxun.github.io/github.io/thanks.html";
+                    console.log("Form successfully submitted, showing thanks section");
+                    showSection('thanks');
                 } else {
                     console.error("Form submission failed:", response.status);
                     alert("送信に失敗しました。もう一度お試しください。");
