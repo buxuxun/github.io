@@ -282,10 +282,10 @@
             transition: border 0.3s ease;
         }
         input[type="text"]::placeholder, input[type="url"]::placeholder, textarea::placeholder {
-            color: #666666; /* プレースホルダーの文字色を薄く */
+            color: #999999; /* プレースホルダーの文字色をさらに薄く */
         }
         select.number-select {
-            width: 50%; /* 数字選択の幅を半分に */
+            width: 25%; /* 数字選択の幅をさらに半分に */
         }
         input[type="text"]:focus, input[type="url"]:focus, select:focus, textarea:focus {
             border: 1px solid #e0e0e0;
@@ -345,6 +345,17 @@
             max-height: 100px;
             opacity: 1;
             transform: translateY(0);
+        }
+        #estimate-summary {
+            border: 2px solid #e0e0e0;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 500px;
+            font-size: 1.5rem; /* 文字を大きめに */
+            font-weight: bold;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
         }
         footer {
             background: rgba(0, 0, 0, 0.3);
@@ -613,8 +624,8 @@
         <div class="content-wrapper">
             <h2>ありがとうございます</h2>
             <p>ご依頼いただき、ありがとうございます。</p>
-            <p>入力していただいた情報から仮のお見積りをさせていただきましたのでご確認ください。</p>
-            <div id="form-summary"></div>
+            <p>仮のお見積りはこちらです</p>
+            <div id="estimate-summary"></div>
             <p>アップロードしていただいた音源を確認後、正確なお見積りを作成し、こちらからご連絡いたします。</p>
         </div>
     </section>
@@ -770,7 +781,7 @@
             total += (otherTrack > 0) ? (otherTrack) * 1000 : 0;
 
             document.getElementById("estimate").textContent = `お見積り金額: ${total.toLocaleString()}円`;
-            return total; // フォーム送信時に使うために返す
+            return total;
         }
 
         document.getElementById("collab").addEventListener("change", function() {
@@ -800,22 +811,8 @@
             console.log("Form submitted, sending to Formsubmit...");
 
             const formData = new FormData(this);
-            const formSummary = `
-                <p>お名前: ${formData.get("name")}</p>
-                <p>ご連絡先: ${formData.get("contact")}</p>
-                <p>基本料金: ${formData.get("base_price")}</p>
-                <p>納期: ${formData.get("delivery")}</p>
-                <p>コラボ: ${formData.get("collab")}${formData.get("collab") === "あり" ? ` (${formData.get("collab_members")}人)` : ""}</p>
-                <p>曲名（原曲URL）: ${formData.get("title_url")}</p>
-                <p>音源URL: ${formData.get("audio_url")}</p>
-                <p>参考曲URL: ${formData.get("ref_url") || "未入力"}</p>
-                <p>メイントラック: ${formData.get("main_track")}</p>
-                <p>ハモリトラック: ${formData.get("harmony_track")}</p>
-                <p>ハモリ作成: ${formData.get("harmony_creation")}</p>
-                <p>その他トラック: ${formData.get("other_track")}</p>
-                <p>その他要望: ${formData.get("message") || "なし"}</p>
-                <p>仮のお見積り: ${calculateEstimate().toLocaleString()}円</p>
-            `;
+            const totalEstimate = calculateEstimate();
+            const estimateSummary = `仮のお見積り: ${totalEstimate.toLocaleString()}円`;
             
             fetch("https://formsubmit.co/buxuxuq@gmail.com", {
                 method: "POST",
@@ -824,7 +821,7 @@
             .then(response => {
                 if (response.ok) {
                     console.log("Form successfully submitted, showing thanks section");
-                    document.getElementById("form-summary").innerHTML = formSummary;
+                    document.getElementById("estimate-summary").innerHTML = estimateSummary;
                     showSection('thanks');
                 } else {
                     console.error("Form submission failed:", response.status);
