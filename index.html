@@ -63,6 +63,31 @@
             position: relative;
             z-index: 1;
         }
+        #desktop-nav {
+            margin: 15px 0;
+            position: relative;
+            z-index: 1;
+        }
+        #desktop-nav a {
+            color: #b0b0b0;
+            text-decoration: none;
+            margin: 0 15px;
+            font-family: 'Raleway', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            text-transform: lowercase;
+            transition: color 0.3s ease, transform 0.2s ease;
+            cursor: pointer;
+        }
+        #desktop-nav a:hover {
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+        #desktop-nav a.active {
+            color: #ffffff;
+            font-weight: 700;
+            border-bottom: 2px solid #ffffff;
+        }
         .hamburger {
             display: none;
             position: fixed;
@@ -84,6 +109,7 @@
         .hamburger span:nth-child(2) { top: 11px; }
         .hamburger span:nth-child(3) { top: 22px; }
         #sidebar {
+            display: none;
             position: fixed;
             top: 0;
             left: -260px;
@@ -94,7 +120,6 @@
             box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
             transition: left 0.3s ease;
             z-index: 1001;
-            display: flex;
             flex-direction: column;
         }
         #sidebar a {
@@ -335,10 +360,14 @@
             color: #ff9f43;
         }
         @media (max-width: 768px) {
+            #desktop-nav {
+                display: none;
+            }
             .hamburger {
                 display: block;
             }
             #sidebar {
+                display: flex;
                 left: -260px;
             }
             #sidebar.open {
@@ -360,14 +389,16 @@
                 width: 100%;
                 height: auto;
             }
-            #estimate {
-                top: 50%;
-                transform: translateY(-50%);
-                margin-left: 10px;
-                font-size: 1rem;
-            }
             form {
                 margin-right: 0;
+            }
+            #estimate {
+                position: static;
+                transform: none;
+                margin: 20px auto 0;
+                text-align: center;
+                display: block;
+                width: fit-content;
             }
         }
     </style>
@@ -375,6 +406,14 @@
 <body>
     <header>
         <h1>STUDIO BUN</h1>
+        <nav id="desktop-nav">
+            <a onclick="showSection('home')" class="active">home</a>
+            <a onclick="showSection('profile')">profile</a>
+            <a onclick="showSection('works')">works</a>
+            <a onclick="showSection('price')">price</a>
+            <a onclick="showSection('form')">form</a>
+            <a onclick="showSection('contact')">contact</a>
+        </nav>
         <div class="hamburger" onclick="toggleSidebar()">
             <span></span>
             <span></span>
@@ -619,6 +658,9 @@
                     section.classList.remove('active');
                     section.style.display = 'none';
                 });
+                document.querySelectorAll('#desktop-nav a').forEach(link => {
+                    link.classList.remove('active');
+                });
                 document.querySelectorAll('#sidebar a').forEach(link => {
                     link.classList.remove('active');
                 });
@@ -636,6 +678,7 @@
                     }
                 }, 50);
 
+                document.querySelector(`#desktop-nav a[onclick="showSection('${sectionId}')"]`).classList.add('active');
                 document.querySelector(`#sidebar a[onclick="showSection('${sectionId}')"]`).classList.add('active');
                 document.getElementById("sidebar").classList.remove("open");
                 document.getElementById("overlay").classList.remove("active");
@@ -697,7 +740,7 @@
             document.getElementById("delivery").addEventListener("change", calculateEstimate);
             document.getElementById("collab").addEventListener("change", calculateEstimate);
             document.getElementById("collab_members").addEventListener("change", calculateEstimate);
-            document.getElementById("main_track omin_track").addEventListener("change", calculateEstimate);
+            document.getElementById("main_track").addEventListener("change", calculateEstimate);
             document.getElementById("harmony_track").addEventListener("change", calculateEstimate);
             document.getElementById("harmony_creation").addEventListener("change", calculateEstimate);
             document.getElementById("other_track").addEventListener("change", calculateEstimate);
