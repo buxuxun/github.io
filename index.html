@@ -125,7 +125,6 @@
             box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
             transition: left 0.3s ease;
             z-index: 1001;
-            display: flex;
             flex-direction: column;
             overflow-y: auto;
         }
@@ -324,6 +323,10 @@
             text-align: center;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
             z-index: 1002;
+            display: none;
+        }
+        #estimate.active {
+            display: block;
         }
         #collab-members {
             max-height: 0;
@@ -411,7 +414,7 @@
             <a onclick="showSection('works')">works</a>
             <a onclick="showSection('price')">price</a>
             <a onclick="showSection('form')">form</a>
-            <a onclick="showSection('contact')">contact</a>
+            <a onclick="showSectio('contact')">contact</a>
         </nav>
         <div class="hamburger" onclick="toggleSidebar()">
             <span></span>
@@ -645,6 +648,7 @@
             const overlay = document.getElementById("overlay");
             sidebar.classList.toggle("open");
             overlay.classList.toggle("active");
+            console.log("Sidebar toggled:", sidebar.classList.contains("open") ? "open" : "closed");
         }
 
         function showSection(sectionId) {
@@ -683,6 +687,13 @@
                     if (sectionId === 'works') {
                         displayYouTubeVideos();
                     }
+                    const estimate = document.getElementById('estimate');
+                    if (sectionId === 'form') {
+                        estimate.classList.add('active');
+                        calculateEstimate();
+                    } else {
+                        estimate.classList.remove('active');
+                    }
                 }, 50);
 
                 const desktopLink = document.querySelector(`#desktop-nav a[onclick="showSection('${sectionId}')"]`);
@@ -696,7 +707,11 @@
         }
 
         document.addEventListener("DOMContentLoaded", () => {
-            console.log("Sidebar items:", document.querySelectorAll('#sidebar a').length);
+            const sidebarItems = document.querySelectorAll('#sidebar a');
+            console.log("Sidebar items loaded:", sidebarItems.length);
+            sidebarItems.forEach((item, index) => {
+                console.log(`Item ${index + 1}: ${item.textContent}`);
+            });
             showSection('home');
         });
 
@@ -757,10 +772,6 @@
             document.getElementById("other_track").addEventListener("change", calculateEstimate);
             calculateEstimate();
         });
-
-        if (document.getElementById("form").classList.contains("active")) {
-            calculateEstimate();
-        }
     </script>
 </body>
 </html>
