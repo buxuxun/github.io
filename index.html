@@ -252,8 +252,9 @@
         }
         #estimate {
             position: absolute;
-            bottom: -50px; /* フォームの下端からフッターの上部まで調整 */
-            left: 100%; /* フォームの右端にピッタリ */
+            top: 50%; /* フォームの中段に */
+            transform: translateY(-50%); /* 縦中央揃え */
+            left: 100%; /* フォームの右端に */
             margin-left: 20px; /* フォームとの間隔 */
             background: rgba(0, 0, 0, 0.8);
             color: #e0e0e0;
@@ -299,6 +300,15 @@
         .social-icons a:hover {
             color: #e0e0e0;
         }
+        /* Contactタブのリンク色を暖かく */
+        #contact a {
+            color: #e67e22; /* 暖かいオレンジ */
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        #contact a:hover {
+            color: #ff9f43; /* ホバー時に少し明るく */
+        }
         /* レスポンシブ対応 */
         @media (max-width: 768px) {
             nav a {
@@ -326,8 +336,10 @@
                 height: auto;
             }
             #estimate {
-                bottom: -40px; /* モバイルでもフッターの上部に調整 */
+                top: 50%; /* 中段キープ */
+                transform: translateY(-50%);
                 margin-left: 10px;
+                font-size: 1rem; /* スマホで少し小さく */
             }
             form {
                 margin-right: 0; /* モバイルではお見積り表示が邪魔にならないように */
@@ -412,7 +424,7 @@
 
     <section id="form">
         <div class="content-wrapper">
-            <!-- お見積り表示（フォームの右、フッターの上部に配置） -->
+            <!-- お見積り表示（フォームの右、中段に配置） -->
             <div id="estimate">お見積り金額: 計算中...</div>
 
             <form action="https://formsubmit.co/buxuxuq@gmail.com" method="POST">
