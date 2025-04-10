@@ -282,10 +282,13 @@
             transition: border 0.3s ease;
         }
         input[type="text"]::placeholder, input[type="url"]::placeholder, textarea::placeholder {
-            color: #999999; /* プレースホルダーの文字色をさらに薄く */
+            color: #999999;
+        }
+        select.main-select {
+            width: 50%; /* 基本料金、納期、コラボの有無 */
         }
         select.number-select {
-            width: 25%; /* 数字選択の幅をさらに半分に */
+            width: 25%; /* その他の数字選択 */
         }
         input[type="text"]:focus, input[type="url"]:focus, select:focus, textarea:focus {
             border: 1px solid #e0e0e0;
@@ -303,15 +306,15 @@
             font-size: 1rem;
             border-radius: 5px;
             cursor: pointer;
-            margin-top: 1.5rem;
+            margin: 1.5rem auto 0; /* 中央揃え */
             display: block;
-            width: 100%;
+            width: 50%; /* 幅50% */
             font-family: 'Raleway', sans-serif;
             font-weight: 700;
             text-transform: uppercase;
             transition: background-color 0.3s ease, transform 0.1s ease;
         }
-        button[type="submit"]:hover {
+        button[type="submit Durant:hover {
             background-color: #574fd6;
             transform: translateY(-2px);
         }
@@ -351,7 +354,7 @@
             padding: 20px;
             margin: 20px auto;
             max-width: 500px;
-            font-size: 1.5rem; /* 文字を大きめに */
+            font-size: 1.5rem;
             font-weight: bold;
             text-align: center;
             background: rgba(255, 255, 255, 0.1);
@@ -487,7 +490,7 @@
             <h2>Price</h2>
             <p>基本料金：フルコーラス￥7,000 / ワンコーラス￥5,000</p>
             <p>納期オプション：3日（+￥3,000） / 1週間（+￥2,000） / 2週間（+￥0）</p>
-            <p>コラボ：1人増えるごとに+￥3,000（例：コラボ2人の場合、基本料金+￥3,000、3人の場合+￥6,000）</p>
+            <p>コラボ：1人増えるごとに+￥4,000（例：コラボ2人の場合、基本料金+￥4,000、3人の場合+￥8,000）</p>
             <p>追加料金：</p>
             <ul>
                 <li>メイントラック：1本目無料、2本目以降1本につき+￥1,000（コラボありの場合はコラボ人数分まで無料）</li>
@@ -505,28 +508,28 @@
         <div class="content-wrapper">
             <form id="mixForm" action="https://formsubmit.co/buxuxuq@gmail.com" method="POST">
                 <h2>Form</h2>
-                <label>お名前（HN可）</label>
+                <label>お名前</label>
                 <input type="text" name="name" placeholder="ぶん" required>
                 <label>ご連絡先（XのIDもしくはメールアドレス）</label>
                 <input type="text" name="contact" placeholder="buxun" required>
                 <label>基本料金</label>
-                <select name="base_price" id="base_price" class="number-select" required>
+                <select name="base_price" id="base_price" class="main-select" required>
                     <option value="フルコーラス">フルコーラス（￥7,000）</option>
                     <option value="ワンコーラス">ワンコーラス（￥5,000）</option>
                 </select>
                 <label>納期</label>
-                <select name="delivery" id="delivery" class="number-select" required>
+                <select name="delivery" id="delivery" class="main-select" required>
                     <option value="2週間">2週間（+￥0）</option>
                     <option value="1週間">1週間（+￥2,000）</option>
                     <option value="3日">3日（+￥3,000）</option>
                 </select>
                 <label>コラボの有無</label>
-                <select name="collab" id="collab" class="number-select" required>
+                <select name="collab" id="collab" class="main-select" required>
                     <option value="なし">コラボなし</option>
                     <option value="あり">コラボあり</option>
                 </select>
                 <div id="collab-members">
-                    <label>コラボ人数（1人増えるごとに+￥3,000）</label>
+                    <label>コラボ人数（1人増えるごとに+￥4,000）</label>
                     <select name="collab_members" id="collab_members" class="number-select">
                         <option value="2">2人</option>
                         <option value="3">3人</option>
@@ -771,7 +774,7 @@
             total += deliveryFees[delivery];
 
             if (collab === "あり") {
-                total += (collabMembers - 1) * 3000;
+                total += (collabMembers - 1) * 4000; // コラボ料金を4000円に変更
             }
 
             const freeTracks = (collab === "あり") ? collabMembers : 1;
