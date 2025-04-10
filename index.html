@@ -91,11 +91,11 @@
             border-bottom: 2px solid #ffffff;
         }
         section {
-            padding: 80px 20px;
+            padding: 80px 20px 120px; /* 下部にフッターの高さ分の余白を追加 */
             text-align: center;
             margin-top: 110px; /* ヘッダーの高さに合わせて調整（ヘッダーの高さ約110px） */
             display: none;
-            min-height: 80vh;
+            min-height: calc(100vh - 230px); /* ヘッダーとフッターの高さを考慮 */
             position: relative;
             background: url('mixing-console.jpg') no-repeat center center;
             background-size: cover;
@@ -248,6 +248,7 @@
             width: 100%;
             backdrop-filter: blur(15px);
             border-top: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1001; /* ヘッダーより高く、セクションより前面に */
         }
         .social-icons a {
             color: #b0b0b0;
@@ -265,8 +266,9 @@
                 font-size: 14px;
             }
             section {
-                padding: 40px 15px;
+                padding: 40px 15px 80px; /* モバイルではパディングを調整 */
                 margin-top: 90px; /* ヘッダーの高さに合わせて調整（モバイルではヘッダーが小さくなる） */
+                min-height: calc(100vh - 190px); /* モバイルでのヘッダーとフッターの高さを考慮 */
             }
             section h2 {
                 font-size: 28px;
@@ -360,17 +362,17 @@
                 ワンコーラス早納歌ってみたMIX（上記作業を3日以内で行い、音源をお送りいたします）<br>
                 ▶️￥8000<br><br>
                 ※通常プランの場合、納期は2週間とさせていただきます。<br>
-                ※トラック数はメインとハモ合計2本までとさせていただきます。<br>
-                （メインは2本目以降1本につき+1000円、コーラスや、台詞などのトラックがある場合は1トラックごとに+1000円頂きます。）<br>
+                ※メイントラックは1本目無料、2本目以降1本につき+1000円、ハモリトラックは1本目まで無料、2本目以降1本につき+1000円、コーラスや台詞などのトラックがある場合は1トラックごとに+1000円頂きます。<br>
                 ※ハモ作成をする場合1本につき+1000円頂きます。<br>
                 ※コラボの場合は基本的に1人増えるごとに+3000円とさせていただきます。<br><br>
                 <strong>例）</strong><br><br>
-                プラン1（メイン2本、台詞1本、ハモリ作成2本）の場合<br><br>
+                プラン1（メイン3本、ハモリ2本、台詞1本、ハモリ作成2本）の場合<br><br>
                 プラン1（7000円）<br>
-                メイン2本（1000円）<br>
+                メイン3本（2000円）<br>
+                ハモリ2本（1000円）<br>
                 台詞1本（1000円）<br>
                 ハモリ作成2本（2000円）<br><br>
-                計11000円となります。<br><br>
+                計13000円となります。<br><br>
                 <strong>お支払いについて</strong><br><br>
                 お支払いを確認させていただいてから、作業開始とさせていただいております。<br>
                 ※お支払い方法は基本的に現金振込とさせていただきます。
@@ -418,7 +420,7 @@
                     <option value="5">5</option>
                 </select>
 
-                <label>ハモリトラック（メインとハモリ合計2本を超える場合、超過分1本につき+1,000円）</label>
+                <label>ハモリトラック（1本目まで無料、2本目以降1本につき+1,000円）</label>
                 <select name="harmony_track" id="harmony_track">
                     <option value="0">0</option>
                     <option value="1">1</option>
@@ -521,12 +523,11 @@
             let total = planPrices[plan];
             // メイントラック：1本目は無料、2本目以降1本につき+1000円
             total += (mainTrack > 1) ? (mainTrack - 1) * 1000 : 0;
-            // メインとハモリトラックの合計が2本を超える場合、超過分を追加料金として計算
-            const totalTracks = mainTrack + harmonyTrack;
-            total += (totalTracks > 2) ? (totalTracks - 2) * 1000 : 0;
-            // ハモリトラック作成の追加料金（1本から+1000円）
+            // ハモリトラック：1本目まで無料、2本目以降1本につき+1000円
+            total += (harmonyTrack > 1) ? (harmonyTrack - 1) * 1000 : 0;
+            // ハモリトラック作成：1本目から1本につき+1000円
             total += (harmonyCreation > 0) ? (harmonyCreation) * 1000 : 0;
-            // その他のトラック（コーラスや合いの手など）の追加料金
+            // その他のトラック：1本目から1本につき+1000円
             total += (otherTrack > 0) ? (otherTrack) * 1000 : 0;
 
             document.getElementById("estimate").textContent = `お見積り金額: ${total.toLocaleString()}円`;
