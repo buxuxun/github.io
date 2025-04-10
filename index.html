@@ -100,7 +100,7 @@
             background: url('images/mixing-console.jpg') no-repeat center center;
             background-size: cover;
             opacity: 0; /* 初期状態で非表示（アニメーション用） */
-            transition: opacity 0.5s ease; /* フェードイン/フェードアウトのアニメーション */
+            transition: opacity 1s ease; /* トランジション時間を1秒に */
         }
         section::before {
             content: '';
@@ -196,7 +196,7 @@
             border: 1px solid #444;
             border-radius: 5px;
             background: rgba(255, 255, 255, 0.1);
-            color: #ffffff; /* 文字色を白に変更 */
+            color: #333333; /* 文字色をダークグレーに変更 */
             font-family: 'Roboto', sans-serif;
             font-size: 1rem;
             box-sizing: border-box;
@@ -237,6 +237,19 @@
             font-weight: bold;
             text-align: right;
             font-family: 'Raleway', sans-serif;
+        }
+        /* コラボ人数のアニメーション */
+        #collab-members {
+            max-height: 0;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        #collab-members.show {
+            max-height: 100px; /* 適切な高さに調整 */
+            opacity: 1;
+            transform: translateY(0);
         }
         footer {
             background: rgba(0, 0, 0, 0.3);
@@ -365,9 +378,9 @@
 
                 <label>納期</label>
                 <select name="delivery" id="delivery" required>
-                    <option value="3日">3日（+￥3,000）</option>
-                    <option value="1週間">1週間（+￥2,000）</option>
                     <option value="2週間">2週間（+￥0）</option>
+                    <option value="1週間">1週間（+￥2,000）</option>
+                    <option value="3日">3日（+￥3,000）</option>
                 </select>
 
                 <label>コラボの有無</label>
@@ -376,7 +389,7 @@
                     <option value="あり">コラボあり</option>
                 </select>
 
-                <div id="collab-members" style="display: none;">
+                <div id="collab-members">
                     <label>コラボ人数（1人増えるごとに+￥3,000）</label>
                     <select name="collab_members" id="collab_members">
                         <option value="1">1人</option>
@@ -416,7 +429,7 @@
                     <option value="10">10</option>
                 </select>
 
-                <label>ハモリトラック（1本目まで無料、2本目以降1本につき+￥1,000）</label>
+                <label>ハモリトラック（2本目以降1本につき+￥1,000）</label>
                 <select name="harmony_track" id="harmony_track">
                     <option value="0">0</option>
                     <option value="1">1</option>
@@ -495,18 +508,33 @@
     <!-- JavaScriptでタブ切り替え -->
     <script>
         function showSection(sectionId) {
-            // すべてのセクションを非表示にする
-            document.querySelectorAll('section').forEach(section => {
-                section.classList.remove('active');
-            });
-            // すべてのナビゲーションリンクのactiveクラスを削除
-            document.querySelectorAll('nav a').forEach(link => {
-                link.classList.remove('active');
-            });
-            // 指定されたセクションを表示
-            document.getElementById(sectionId).classList.add('active');
-            // 対応するナビゲーションリンクにactiveクラスを追加
-            document.querySelector(`nav a[onclick="showSection('${sectionId}')"]`).classList.add('active');
+            // 現在アクティブなセクションをフェードアウト
+            const currentSection = document.querySelector('section.active');
+            if (currentSection) {
+                currentSection.style.opacity = '0';
+            }
+
+            // すべてのセクションを非表示にし、すべてのナビリンクのactiveクラスを削除
+            setTimeout(() => {
+                document.querySelectorAll('section').forEach(section => {
+                    section.classList.remove('active');
+                    section.style.display = 'none';
+                });
+                document.querySelectorAll('nav a').forEach(link => {
+                    link.classList.remove('active');
+                });
+
+                // 新しいセクションを表示してフェードイン
+                const newSection = document.getElementById(sectionId);
+                newSection.style.display = 'block';
+                setTimeout(() => {
+                    newSection.classList.add('active');
+                    newSection.style.opacity = '1';
+                }, 50); // わずかな遅延でスムーズに
+
+                // 対応するナビリンクにactiveクラスを追加
+                document.querySelector(`nav a[onclick="showSection('${sectionId}')"]`).classList.add('active');
+            }, 1000); // フェードアウトの時間（1秒）に合わせる
         }
 
         // 初期表示でHOMEを表示
@@ -552,9 +580,9 @@
         document.getElementById("collab").addEventListener("change", function() {
             const collabMembersDiv = document.getElementById("collab-members");
             if (this.value === "あり") {
-                collabMembersDiv.style.display = "block";
+                collabMembersDiv.classList.add("show");
             } else {
-                collabMembersDiv.style.display = "none";
+                collabMembersDiv.classList.remove("show");
             }
             calculateEstimate();
         });
