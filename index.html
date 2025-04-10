@@ -153,14 +153,17 @@
         }
         /* YouTube動画のスタイル */
         .youtube-videos {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            display: grid; /* flexからgridに変更 */
+            grid-template-columns: repeat(3, 1fr); /* 横に3つまで */
             gap: 20px;
+            justify-content: center;
             margin-top: 20px;
+            max-width: 1000px; /* 必要に応じて調整 */
+            margin-left: auto;
+            margin-right: auto;
         }
         .youtube-videos iframe {
-            width: 300px;
+            width: 100%;
             height: 169px; /* 16:9のアスペクト比 */
             border: none;
             border-radius: 10px;
@@ -235,8 +238,8 @@
         }
         #estimate {
             position: fixed;
-            top: 140px; /* ヘッダーの高さ（約110px）+余白（30px） */
-            right: 20px;
+            bottom: 60px; /* フッターの上に配置 */
+            right: 20px; /* 右端から少し内側 */
             background: rgba(0, 0, 0, 0.8);
             color: #e0e0e0;
             padding: 10px 20px;
@@ -298,12 +301,15 @@
             header h1 {
                 font-size: 28px;
             }
+            .youtube-videos {
+                grid-template-columns: 1fr; /* モバイルでは1列に */
+            }
             .youtube-videos iframe {
                 width: 100%;
                 height: auto;
             }
             #estimate {
-                top: 120px; /* モバイルではヘッダーが小さくなる（約90px）+余白（30px） */
+                bottom: 50px; /* モバイルでもフッターの上に */
                 right: 10px;
                 font-size: 1rem;
                 padding: 8px 15px;
@@ -512,7 +518,9 @@
     <section id="contact">
         <div class="content-wrapper">
             <h2>Contact</h2>
-            <p>メール: mixmaster@studio.com | 電話: 123-456-7890</p>
+            <p>メールアドレス: <a href="mailto:buxuxuq@gmail.com">buxuxuq@gmail.com</a></p>
+            <p>X: <a href="https://twitter.com/buxun" target="_blank">@buxun</a></p>
+            <p>企業様は、直接メールにてご連絡ください。</p>
         </div>
     </section>
 
@@ -558,7 +566,7 @@
 
             // シャッフルされた動画を挿入
             shuffledVideos.forEach(videoUrl => {
-                const iframe = document.createElement("iframe");
+ bedded iframe = document.createElement("iframe");
                 iframe.src = videoUrl;
                 iframe.allowFullscreen = true;
                 container.appendChild(iframe);
