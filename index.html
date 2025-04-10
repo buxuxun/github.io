@@ -566,7 +566,7 @@
 
             // シャッフルされた動画を挿入
             shuffledVideos.forEach(videoUrl => {
- bedded iframe = document.createElement("iframe");
+                const iframe = document.createElement("iframe");
                 iframe.src = videoUrl;
                 iframe.allowFullscreen = true;
                 container.appendChild(iframe);
