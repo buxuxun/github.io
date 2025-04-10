@@ -90,6 +90,19 @@
             font-weight: 700;
             border-bottom: 2px solid #ffffff;
         }
+        /* ドロップダウンメニューのスタイル */
+        #mobile-nav {
+            display: none;
+            width: 100%;
+            padding: 10px;
+            font-family: 'Raleway', sans-serif;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #e0e0e0;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+            text-transform: lowercase;
+        }
         section {
             padding: 80px 20px 120px; /* 下部にフッターの高さ分の余白を追加 */
             text-align: center;
@@ -289,8 +302,10 @@
         /* レスポンシブ対応 */
         @media (max-width: 768px) {
             nav a {
-                margin: 0 10px;
-                font-size: 14px;
+                display: none; /* リンクを非表示 */
+            }
+            #mobile-nav {
+                display: block; /* ドロップダウンを表示 */
             }
             section {
                 padding: 40px 15px 80px; /* モバイルではパディングを調整 */
@@ -312,7 +327,7 @@
             }
             #estimate {
                 bottom: -40px; /* モバイルでもフッターの上部に調整 */
-                margin-left: 10px; /* モバイルでは間隔を狭く */
+                margin-left: 10px;
             }
             form {
                 margin-right: 0; /* モバイルではお見積り表示が邪魔にならないように */
@@ -331,6 +346,15 @@
             <a onclick="showSection('price')">price</a>
             <a onclick="showSection('form')">form</a>
             <a onclick="showSection('contact')">contact</a>
+            <!-- ドロップダウンメニュー -->
+            <select id="mobile-nav" onchange="showSection(this.value)">
+                <option value="home">home</option>
+                <option value="profile">profile</option>
+                <option value="works">works</option>
+                <option value="price">price</option>
+                <option value="form">form</option>
+                <option value="contact">contact</option>
+            </select>
         </nav>
     </header>
 
@@ -611,12 +635,15 @@
 
                 // 対応するナビリンクにactiveクラスを追加
                 document.querySelector(`nav a[onclick="showSection('${sectionId}')"]`).classList.add('active');
+                // ドロップダウンの選択を更新
+                document.getElementById("mobile-nav").value = sectionId;
             }, 500); // フェードアウトの時間（0.5秒）に合わせる
         }
 
         // 初期表示でHOMEを表示
         document.addEventListener("DOMContentLoaded", () => {
             showSection('home');
+            document.getElementById("mobile-nav").value = "home"; // ドロップダウンの初期値を設定
         });
     </script>
 
@@ -669,7 +696,7 @@
         }
 
         // コラボの有無に応じてコラボ人数の選択を表示/非表示
-        document.getElementById("collab").ritéEventListener("change", function() {
+        document.getElementById("collab").addEventListener("change", function() {
             const collabMembersDiv = document.getElementById("collab-members");
             if (this.value === "あり") {
                 collabMembersDiv.classList.add("show");
