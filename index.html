@@ -93,34 +93,40 @@
             position: fixed;
             top: 20px;
             right: 20px;
-            width: 30px;
-            height: 25px;
+            width: 40px;
+            height: 40px;
             cursor: pointer;
             z-index: 1002;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 5px;
+            padding: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
         }
         .hamburger span {
             position: absolute;
-            width: 100%;
+            width: 70%;
             height: 3px;
-            background: #ffffff;
+            background: #333333;
             transition: all 0.3s ease;
+            left: 15%;
         }
-        .hamburger span:nth-child(1) { top: 0; }
-        .hamburger span:nth-child(2) { top: 11px; }
-        .hamburger span:nth-child(3) { top: 22px; }
+        .hamburger span:nth-child(1) { top: 10px; }
+        .hamburger span:nth-child(2) { top: 18px; }
+        .hamburger span:nth-child(3) { top: 26px; }
         #sidebar {
             display: none;
             position: fixed;
             top: 0;
-            left: -260px;
+            left: -270px;
             width: 250px;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            height: 80%;
+            background: #333333;
             padding: 60px 20px 20px;
             box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
             transition: left 0.3s ease;
             z-index: 1001;
             flex-direction: column;
+            overflow-y: auto;
         }
         #sidebar a {
             color: #e0e0e0;
@@ -134,11 +140,11 @@
             cursor: pointer;
         }
         #sidebar a:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background: #555555;
             color: #ffffff;
         }
         #sidebar a.active {
-            background: rgba(255, 255, 255, 0.2);
+            background: #444444;
             color: #ffffff;
             font-weight: 700;
         }
@@ -368,7 +374,7 @@
             }
             #sidebar {
                 display: flex;
-                left: -260px;
+                left: -270px;
             }
             #sidebar.open {
                 left: 0;
