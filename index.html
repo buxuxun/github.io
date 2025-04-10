@@ -13,7 +13,7 @@
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2073&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center fixed; /* ロンドンの夜景 */
+            background: url('https://images.unsplash.com/photo-1513635269975-59663e0ac514?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center fixed; /* ロンドンの夜景 */
             background-size: cover;
             color: #e0e0e0;
             line-height: 1.6;
@@ -32,7 +32,7 @@
         header {
             text-align: center;
             padding: 20px;
-            position: fixed;
+            position: fixed; /* ヘッダーを固定 */
             top: 0;
             width: 100%;
             z-index: 1000;
@@ -92,7 +92,7 @@
         section {
             padding: 80px 20px;
             text-align: center;
-            margin-top: 120px;
+            margin-top: 140px; /* ヘッダーの高さ分（約120px）を考慮して調整 */
             display: none;
             min-height: 80vh;
             position: relative;
@@ -235,7 +235,7 @@
             }
             section {
                 padding: 40px 15px;
-                margin-top: 100px;
+                margin-top: 100px; /* ヘッダーの高さに合わせて調整 */
             }
             section h2 {
                 font-size: 28px;
@@ -360,7 +360,8 @@
                 <textarea name="message" rows="5" placeholder="エフェクトや納期のご相談などあればどうぞ"></textarea>
 
                 <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_next" value="thanks.html"> <!-- リダイレクト先をthanks.htmlに変更 -->
+                <input type="hidden" name="_subject" value="STUDIO BUN - 新しいミックス依頼">
+                <input type="hidden" name="_next" value="https://buxuxun.github.io/github.io/thanks"> <!-- リダイレクト先を変更 -->
 
                 <button type="submit">送信する</button>
             </form>
